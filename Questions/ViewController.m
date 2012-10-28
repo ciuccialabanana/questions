@@ -10,20 +10,54 @@
 
 @interface ViewController ()
 
+@property (nonatomic, weak) Facebook *facebook;
+
+
 @end
 
+
 @implementation ViewController
+
+@synthesize facebook = _facebook;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    self.facebook = [Facebook sharedInstance];
+    self.facebook.delegate = self;
+    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
+
+- (IBAction)onLoginClick:(id)sender {
+    [self checkFBSession];
+}
+
+#pragma mark - Facebook login
+
+- (void)checkFBSession
+{
+    if ([self.facebook checkSession]) {
+        [self performSegueWithIdentifier:@"signIn" sender:self];
+    } else {
+        [self.facebook openSession];
+    }
+}
+
+- (void)facebookLoginSuccess
+{
+    [self performSegueWithIdentifier:@"signIn" sender:self];
+}
+- (void)facebookLoginFailed
+{
+    [self performSegueWithIdentifier:@"signIn" sender:self];
+}
+
+
 
 @end
