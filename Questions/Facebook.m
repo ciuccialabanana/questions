@@ -29,8 +29,11 @@
                       error:(NSError *)error
 {
     switch (state) {
-        case FBSessionStateOpen:
+        case FBSessionStateOpen: {
+            FBCacheDescriptor *cacheDescriptor = [FBFriendPickerViewController cacheDescriptor];
+            [cacheDescriptor prefetchAndCacheForSession:session];
             [self.delegate facebookLoginSuccess];
+        }
             break;
         case FBSessionStateClosed:
         case FBSessionStateClosedLoginFailed:

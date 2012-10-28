@@ -7,26 +7,21 @@
 //
 
 #import "ViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface ViewController ()
 
-@property (nonatomic, weak) Facebook *facebook;
-
+@property (strong, nonatomic)  FBFriendPickerViewController *friendPickerController;
 
 @end
 
 
 @implementation ViewController
 
-@synthesize facebook = _facebook;
-
+@synthesize friendPickerController = _friendPickerController;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.facebook = [Facebook sharedInstance];
-    self.facebook.delegate = self;
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,30 +29,21 @@
     [super didReceiveMemoryWarning];
 }
 
-- (IBAction)onLoginClick:(id)sender {
-    [self checkFBSession];
-}
-
-#pragma mark - Facebook login
-
-- (void)checkFBSession
-{
-    if ([self.facebook checkSession]) {
-        [self performSegueWithIdentifier:@"signIn" sender:self];
-    } else {
-        [self.facebook openSession];
+- (IBAction)onSendQuestion:(id)sender {
+    if (self.friendPickerController == nil) {
+        // Create friend picker, and get data loaded into it.
+        self.friendPickerController = [[FBFriendPickerViewController alloc] init];
     }
-}
+    
+    [self.friendPickerController loadData];
+    [self.friendPickerController clearSelection];
+    
 
-- (void)facebookLoginSuccess
-{
-    [self performSegueWithIdentifier:@"signIn" sender:self];
-}
-- (void)facebookLoginFailed
-{
-    [self performSegueWithIdentifier:@"signIn" sender:self];
-}
+    [self presentViewController:self.friendPickerController animated:YES completion:^() {
+        NSLog(@"friends list loaded");
+    }];
 
+}
 
 
 @end

@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  LoginViewController.h
 //  Questions
 //
 //  Created by Giuseppe Macri on 10/27/12.
@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Facebook.h"
 
-@interface ViewController : UIViewController 
+@interface LoginViewController : UIViewController <facebookDelegate>
 
 @end
