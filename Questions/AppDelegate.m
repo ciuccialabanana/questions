@@ -8,11 +8,14 @@
 
 #import "AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import <Parse/Parse.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Parse setApplicationId:@"fqNqNeGBqtjp3pP6UNjWlIs2wejZoIFTGNbGNlQk"
+                  clientKey:@"dpJ1k5cgnaY1thYIc6a5oluNzg0C4b76htAq8GwA"];
     // Override point for customization after application launch.
     return YES;
 }
