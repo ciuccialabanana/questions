@@ -38,11 +38,33 @@
     [self.friendPickerController loadData];
     [self.friendPickerController clearSelection];
     
+    self.friendPickerController.title = @"Select Friends";
+    self.friendPickerController.delegate = self;
+    
 
     [self presentViewController:self.friendPickerController animated:YES completion:^() {
         NSLog(@"friends list loaded");
     }];
 
+}
+
+- (void) handlePickerDone
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)facebookViewControllerCancelWasPressed:(id)sender
+{
+    NSLog(@"Friend selection cancelled.");
+    [self handlePickerDone];
+}
+
+- (void)facebookViewControllerDoneWasPressed:(id)sender
+{
+    for (id<FBGraphUser> user in self.friendPickerController.selection) {
+        NSLog(@"Friend selected: %@", user.name);
+    }
+    [self handlePickerDone];
 }
 
 
