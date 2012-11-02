@@ -6,18 +6,18 @@
 //  Copyright (c) 2012 FJ. All rights reserved.
 //
 
-#import "CategoriesViewController.h"
+#import "CategoryTableViewController.h"
 #import "Parse/Parse.h"
 
 
-@interface CategoriesViewController ()
+@interface CategoryTableViewController ()
     @property (nonatomic, strong) NSMutableArray *categories;
 
 
 @end
 
 
-@implementation CategoriesViewController
+@implementation CategoryTableViewController
 @synthesize categories=_categories;
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -40,15 +40,10 @@
     for (int i = 0; i < objects.count; i++) {
         PFObject *category = objects[i];
         NSString *categoryName = [category objectForKey:@"name"];
-        NSLog(categoryName);
+        NSLog(@"category: %@", categoryName);
         [self.categories addObject:categoryName];
     }
 
-    
-
-    
-
-    
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -67,14 +62,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
     return [self.categories count];
 }
 
@@ -88,57 +80,16 @@
                              dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc]
-                initWithStyle:UITableViewCellStyleDefault
+                initWithStyle:UITableViewCellStyleSubtitle
                 reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
-    cell.text = [self.categories
-                           objectAtIndex: [indexPath row]];
-    
-    
+    cell.textLabel.text = [self.categories objectAtIndex: [indexPath row]];
+    cell.detailTextLabel.text = @"1 - 50";
     
     return cell;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 

@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import <FacebookSDK/FacebookSDK.h>
+
 #import <Parse/Parse.h>
 
 @interface ViewController ()
@@ -113,7 +113,8 @@
 
 - (void) handlePickerDone
 {
-    [self dismissModalViewControllerAnimated:YES];
+//    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^(void){}];
 }
 
 - (void)facebookViewControllerCancelWasPressed:(id)sender
