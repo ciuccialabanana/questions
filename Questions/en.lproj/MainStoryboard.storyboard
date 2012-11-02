@@ -9,7 +9,7 @@
             <objects>
                 <tableViewController id="wua-M6-3sg" customClass="CategoryTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="lRe-b0-m4G">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -40,10 +40,11 @@
                             <outlet property="delegate" destination="wua-M6-3sg" id="gZZ-bY-GZf"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="RJT-Wy-OvF"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dGu-Vq-uEP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="88" y="-662"/>
+            <point key="canvasLocation" x="614" y="-662"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="28s-ru-STi">
@@ -63,7 +64,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="wua-M6-3sg" kind="modal" id="Dzg-e1-4dW"/>
+                                    <segue destination="M9d-bU-DyX" kind="modal" modalTransitionStyle="coverVertical" id="Dzg-e1-4dW"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJg-BW-EAY">
@@ -82,10 +83,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="HJg-BW-EAY" secondAttribute="bottom" constant="173" id="DTv-T5-5cZ"/>
                             <constraint firstItem="Hc5-nj-oWu" firstAttribute="centerX" secondItem="4s5-Sk-gpZ" secondAttribute="centerX" type="default" id="GCH-zO-S95"/>
-                            <constraint firstItem="Hc5-nj-oWu" firstAttribute="top" secondItem="4s5-Sk-gpZ" secondAttribute="top" constant="121" id="I9q-KQ-TEO"/>
-                            <constraint firstItem="HJg-BW-EAY" firstAttribute="top" secondItem="4s5-Sk-gpZ" secondAttribute="top" constant="241" id="Ovs-J0-gzd"/>
-                            <constraint firstItem="HJg-BW-EAY" firstAttribute="leading" secondItem="4s5-Sk-gpZ" secondAttribute="leading" constant="75" id="gk5-VU-Xmy"/>
+                            <constraint firstItem="Hc5-nj-oWu" firstAttribute="top" secondItem="4s5-Sk-gpZ" secondAttribute="top" constant="158" id="kcV-4E-Gfn"/>
+                            <constraint firstItem="HJg-BW-EAY" firstAttribute="centerX" secondItem="Hc5-nj-oWu" secondAttribute="centerX" type="default" id="wKt-N5-Joe"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -203,10 +204,35 @@
             </objects>
             <point key="canvasLocation" x="598" y="99"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="HuF-Ez-Yoz">
+            <objects>
+                <navigationController id="M9d-bU-DyX" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="RVG-WY-Let">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wua-M6-3sg" kind="relationship" relationship="rootViewController" id="GPM-fV-mxH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7SA-Q3-rSd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="88" y="-662"/>
+        </scene>
     </scenes>
     <classes>
+        <class className="CategoryTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategoryTableViewController.h"/>
+        </class>
         <class className="LoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="onLoginClick:"/>
+            </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>

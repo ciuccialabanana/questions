@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Parse/Parse.h"
 
-@interface CategoryTableViewController : UITableViewController
+@interface CategoryTableViewController : PFQueryTableViewController
 
 @end

@@ -7,18 +7,16 @@
 //
 
 #import "CategoryTableViewController.h"
-#import "Parse/Parse.h"
+
 
 
 @interface CategoryTableViewController ()
-    @property (nonatomic, strong) NSMutableArray *categories;
-
 
 @end
 
 
 @implementation CategoryTableViewController
-@synthesize categories=_categories;
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -31,26 +29,32 @@
 
 - (void)viewDidLoad
 {
-    self.categories = [[NSMutableArray alloc] init];
-    [super viewDidLoad];    
+    self.className = @"Category";
+    self.pullToRefreshEnabled = YES;
+    self.paginationEnabled = NO;
+    self.objectsPerPage = 5;
+    
+    
+    [super viewDidLoad];
 
-    PFQuery *query = [PFQuery queryWithClassName:@"Category"];
-    NSArray* objects = [query findObjects] ;
-            
-    for (int i = 0; i < objects.count; i++) {
-        PFObject *category = objects[i];
-        NSString *categoryName = [category objectForKey:@"name"];
-        NSLog(@"category: %@", categoryName);
-        [self.categories addObject:categoryName];
-    }
-
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+- (PFQuery *)queryForTable {
+    PFQuery *query = [PFQuery queryWithClassName:self.className];
+    
+    // If no objects are loaded in memory, we look to the cache
+    // first to fill the table and then subsequently do a query
+    // against the network.
+    if ([self.objects count] == 0) {
+        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    }
+    
+    [query orderByAscending:@"createdAt"];
+    
+    return query;
+}
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -58,34 +62,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [self.categories count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+                        object:(PFObject *)object {
     static NSString *CellIdentifier = @"categoryTableCell";
     
-    UITableViewCell *cell = [tableView
-                             dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]
-                initWithStyle:UITableViewCellStyleSubtitle
-                reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                      reuseIdentifier:CellIdentifier];
     }
     
-    // Configure the cell...
-    cell.textLabel.text = [self.categories objectAtIndex: [indexPath row]];
+    // Configure the cell to show todo item with a priority at the bottom
+    cell.textLabel.text = [object objectForKey:@"name"];
     cell.detailTextLabel.text = @"1 - 50";
     
     return cell;
