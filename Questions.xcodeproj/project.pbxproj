@@ -25,6 +25,7 @@
 		87C89D5B163CB34500A39431 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C89D58163CB34500A39431 /* Social.framework */; };
 		87C89D5F163CB90600A39431 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C89D5E163CB90600A39431 /* Facebook.m */; };
 		87C89D6E163CCE7F00A39431 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C89D6D163CCE7F00A39431 /* LoginViewController.m */; };
+		B198504B1642473900DE9035 /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B198504A1642473900DE9035 /* CategoriesViewController.m */; };
 		B19FF0FB163F7A830055A42A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19FF0FA163F7A830055A42A /* Parse.framework */; };
 		B19FF0FE163F7AFA0055A42A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19FF0FD163F7AFA0055A42A /* AudioToolbox.framework */; };
 		B19FF100163F7B1C0055A42A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19FF0FF163F7B1C0055A42A /* CFNetwork.framework */; };
@@ -65,6 +66,8 @@
 		87C89D5E163CB90600A39431 /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
 		87C89D6C163CCE7F00A39431 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		87C89D6D163CCE7F00A39431 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		B19850491642473900DE9035 /* CategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesViewController.h; sourceTree = "<group>"; };
+		B198504A1642473900DE9035 /* CategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesViewController.m; sourceTree = "<group>"; };
 		B19FF0FA163F7A830055A42A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		B19FF0FD163F7AFA0055A42A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		B19FF0FF163F7B1C0055A42A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -164,6 +167,8 @@
 				87C89D36163CAF2900A39431 /* Supporting Files */,
 				87C89D6C163CCE7F00A39431 /* LoginViewController.h */,
 				87C89D6D163CCE7F00A39431 /* LoginViewController.m */,
+				B19850491642473900DE9035 /* CategoriesViewController.h */,
+				B198504A1642473900DE9035 /* CategoriesViewController.m */,
 			);
 			path = Questions;
 			sourceTree = "<group>";
@@ -264,6 +269,7 @@
 				87C89D4C163CAF2900A39431 /* ViewController.m in Sources */,
 				87C89D5F163CB90600A39431 /* Facebook.m in Sources */,
 				87C89D6E163CCE7F00A39431 /* LoginViewController.m in Sources */,
+				B198504B1642473900DE9035 /* CategoriesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
