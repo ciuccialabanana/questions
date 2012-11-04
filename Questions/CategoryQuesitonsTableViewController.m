@@ -1,42 +1,37 @@
 //
-//  CategoriesViewController.m
+//  CategoryQuesitonsTableViewController.m
 //  Questions
 //
-//  Created by Alberto Montagnese on 10/31/12.
+//  Created by Giuseppe Macri on 11/3/12.
 //  Copyright (c) 2012 FJ. All rights reserved.
 //
 
-#import "CategoryTableViewController.h"
 #import "CategoryQuesitonsTableViewController.h"
 
-
-
-@interface CategoryTableViewController ()
-
-@property (nonatomic, strong) NSNumber *currentCategoryId;
+@interface CategoryQuesitonsTableViewController ()
 
 @end
 
+@implementation CategoryQuesitonsTableViewController
 
-@implementation CategoryTableViewController
+@synthesize categoryId = _categoryId;
 
-@synthesize currentCategoryId = _currentCategoryId;
 
 - (void)viewDidLoad
 {
-    self.className = @"Categories";
+    self.className = @"Questions";
     self.pullToRefreshEnabled = YES;
-    self.paginationEnabled = NO;
+    self.paginationEnabled = YES;
     self.objectsPerPage = 5;
     
-    
     [super viewDidLoad];
-
+	// Do any additional setup after loading the view.
 }
+
 
 - (PFQuery *)queryForTable {
     PFQuery *query = [PFQuery queryWithClassName:self.className];
-    
+    [query whereKey:@"categoryId" equalTo:self.categoryId];
     // If no objects are loaded in memory, we look to the cache
     // first to fill the table and then subsequently do a query
     // against the network.
@@ -50,13 +45,16 @@
 }
 
 
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+- (void)setCategoryId:(NSNumber *)categoryId
+{
+    _categoryId = categoryId;
+}
 
 #pragma mark - Table view data source
 
@@ -64,7 +62,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
                         object:(PFObject *)object {
-    static NSString *CellIdentifier = @"categoryTableCell";
+    static NSString *CellIdentifier = @"QuestionCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -73,8 +71,8 @@
     }
     
     // Configure the cell to show todo item with a priority at the bottom
-    cell.textLabel.text = [object objectForKey:@"name"];
-    cell.detailTextLabel.text = @"1 - 50";
+    cell.textLabel.text = [object objectForKey:@"question"];
+    cell.detailTextLabel.text = @"Complete/To do";
     
     return cell;
 }
@@ -83,21 +81,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.currentCategoryId = [[self objectAtIndexPath:indexPath] objectForKey:@"orderId"];
-    [self performSegueWithIdentifier:@"goToCategoryQuestions" sender:[self.tableView cellForRowAtIndexPath:indexPath]];
+    // Navigation logic may go here. Create and push another view controller.
+    /*
+     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+     // ...
+     // Pass the selected object to the new view controller.
+     [self.navigationController pushViewController:detailViewController animated:YES];
+     */
     
-}
-
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier compare:@"goToCategoryQuestions"] == NSOrderedSame) {
-        if ([segue.destinationViewController isKindOfClass:[CategoryQuesitonsTableViewController class]]) {
-            CategoryQuesitonsTableViewController *destination = segue.destinationViewController;
-            destination.categoryId = self.currentCategoryId;
-        }
-        
-    }
 }
 
 
