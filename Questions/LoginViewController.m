@@ -39,7 +39,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-
 - (IBAction)onLoginClick:(id)sender {
     [self checkFBSession];
 }
@@ -57,7 +56,7 @@
 }
 - (void)facebookLoginFailed
 {
-    [self performSegueWithIdentifier:@"signIn" sender:self];
+    NSLog(@"facebook log in error");
 }
 
 @end
