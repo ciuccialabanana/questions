@@ -7,7 +7,7 @@
 //
 
 #import "CategoryTableViewController.h"
-#import "CategoryQuesitonsTableViewController.h"
+#import "CategoryQuestionsTableViewController.h"
 
 
 
@@ -92,8 +92,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier compare:@"goToCategoryQuestions"] == NSOrderedSame) {
-        if ([segue.destinationViewController isKindOfClass:[CategoryQuesitonsTableViewController class]]) {
-            CategoryQuesitonsTableViewController *destination = segue.destinationViewController;
+        if ([segue.destinationViewController isKindOfClass:[CategoryQuestionsTableViewController class]]) {
+            CategoryQuestionsTableViewController *destination = segue.destinationViewController;
             destination.categoryId = self.currentCategoryId;
         }
         

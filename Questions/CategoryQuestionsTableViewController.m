@@ -6,13 +6,13 @@
 //  Copyright (c) 2012 FJ. All rights reserved.
 //
 
-#import "CategoryQuesitonsTableViewController.h"
+#import "CategoryQuestionsTableViewController.h"
 
-@interface CategoryQuesitonsTableViewController ()
+@interface CategoryQuestionsTableViewController ()
 
 @end
 
-@implementation CategoryQuesitonsTableViewController
+@implementation CategoryQuestionsTableViewController
 
 @synthesize categoryId = _categoryId;
 

@@ -8,7 +8,7 @@
 
 #import <Parse/Parse.h>
 
-@interface CategoryQuesitonsTableViewController : PFQueryTableViewController
+@interface CategoryQuestionsTableViewController : PFQueryTableViewController
 
 @property (nonatomic, strong) NSNumber *categoryId;
 

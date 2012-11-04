@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		879F14601645E3660001815A /* CategoryQuesitonsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 879F145F1645E3660001815A /* CategoryQuesitonsTableViewController.m */; };
+		879F14601645E3660001815A /* CategoryQuestionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 879F145F1645E3660001815A /* CategoryQuestionsTableViewController.m */; };
 		87C89D30163CAF2900A39431 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C89D2F163CAF2900A39431 /* UIKit.framework */; };
 		87C89D32163CAF2900A39431 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C89D31163CAF2900A39431 /* Foundation.framework */; };
 		87C89D34163CAF2900A39431 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C89D33163CAF2900A39431 /* CoreGraphics.framework */; };
@@ -40,8 +40,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		879F145E1645E3660001815A /* CategoryQuesitonsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryQuesitonsTableViewController.h; sourceTree = "<group>"; };
-		879F145F1645E3660001815A /* CategoryQuesitonsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryQuesitonsTableViewController.m; sourceTree = "<group>"; };
+		879F145E1645E3660001815A /* CategoryQuestionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryQuestionsTableViewController.h; sourceTree = "<group>"; };
+		879F145F1645E3660001815A /* CategoryQuestionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryQuestionsTableViewController.m; sourceTree = "<group>"; };
 		87C89D2B163CAF2900A39431 /* Questions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Questions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87C89D2F163CAF2900A39431 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		87C89D31163CAF2900A39431 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -164,8 +164,8 @@
 				B19850491642473900DE9035 /* CategoryTableViewController.h */,
 				B198504A1642473900DE9035 /* CategoryTableViewController.m */,
 				87C89D36163CAF2900A39431 /* Supporting Files */,
-				879F145E1645E3660001815A /* CategoryQuesitonsTableViewController.h */,
-				879F145F1645E3660001815A /* CategoryQuesitonsTableViewController.m */,
+				879F145E1645E3660001815A /* CategoryQuestionsTableViewController.h */,
+				879F145F1645E3660001815A /* CategoryQuestionsTableViewController.m */,
 			);
 			path = Questions;
 			sourceTree = "<group>";
@@ -267,7 +267,7 @@
 				87C89D5F163CB90600A39431 /* Facebook.m in Sources */,
 				87C89D6E163CCE7F00A39431 /* LoginViewController.m in Sources */,
 				B198504B1642473900DE9035 /* CategoryTableViewController.m in Sources */,
-				879F14601645E3660001815A /* CategoryQuesitonsTableViewController.m in Sources */,
+				879F14601645E3660001815A /* CategoryQuestionsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

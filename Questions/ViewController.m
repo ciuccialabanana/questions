@@ -11,7 +11,9 @@
 #import <Parse/Parse.h>
 
 @interface ViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *loggedInMessage;
+
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
 
 @property (weak, nonatomic)  NSDictionary<FBGraphUser> *user;
 
@@ -20,26 +22,20 @@
 
 @implementation ViewController
 
+@synthesize user = _user;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    
+    [self.loadingIndicator setHidesWhenStopped:YES];
     // TODO: check how to retrieve user information using new fb sdk
-//    if (FBSession.activeSession.isOpen) {
-//        [[FBRequest requestForMe] startWithCompletionHandler:
-//         ^(FBRequestConnection *connection,
-//           NSDictionary<FBGraphUser> *user,
-//           NSError *error) {
-//             if (!error) {
-//                 self.user = user;     
-//             }
-//         }];
-//    }
-
-
-    
+    if (FBSession.activeSession.isOpen) {
+        [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
+            self.user = user;
+            [self.loadingIndicator stopAnimating];
+            self.userNameLabel.text = user.name;
+        }];
+    }    
     
 }
 
