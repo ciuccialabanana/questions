@@ -37,6 +37,7 @@
 		B19FF10E163F7B6F0055A42A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19FF10D163F7B6F0055A42A /* QuartzCore.framework */; };
 		B19FF110163F7B790055A42A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19FF10F163F7B790055A42A /* MobileCoreServices.framework */; };
 		B19FF112163F81510055A42A /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = B19FF111163F81510055A42A /* Icon-72.png */; };
+		B1A838EF1647D79700764CC4 /* splashScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = B1A838EE1647D79700764CC4 /* splashScreen.png */; };
 		B1AFDFC8164751BF0068A0E0 /* QuestionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B1AFDFC7164751BF0068A0E0 /* QuestionDetailViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 		B19FF10D163F7B6F0055A42A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B19FF10F163F7B790055A42A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		B19FF111163F81510055A42A /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		B1A838EE1647D79700764CC4 /* splashScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splashScreen.png; sourceTree = "<group>"; };
 		B1AFDFC6164751BF0068A0E0 /* QuestionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionDetailViewController.h; sourceTree = "<group>"; };
 		B1AFDFC7164751BF0068A0E0 /* QuestionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -178,6 +180,7 @@
 		87C89D36163CAF2900A39431 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B1A838EE1647D79700764CC4 /* splashScreen.png */,
 				87C89D37163CAF2900A39431 /* Questions-Info.plist */,
 				87C89D38163CAF2900A39431 /* InfoPlist.strings */,
 				87C89D3B163CAF2900A39431 /* main.m */,
@@ -256,6 +259,7 @@
 				87C89D49163CAF2900A39431 /* MainStoryboard.storyboard in Resources */,
 				87C89D55163CB12F00A39431 /* FacebookSDKResources.bundle in Resources */,
 				B19FF112163F81510055A42A /* Icon-72.png in Resources */,
+				B1A838EF1647D79700764CC4 /* splashScreen.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
