@@ -37,6 +37,7 @@
 		B19FF10E163F7B6F0055A42A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19FF10D163F7B6F0055A42A /* QuartzCore.framework */; };
 		B19FF110163F7B790055A42A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19FF10F163F7B790055A42A /* MobileCoreServices.framework */; };
 		B19FF112163F81510055A42A /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = B19FF111163F81510055A42A /* Icon-72.png */; };
+		B1AFDFC8164751BF0068A0E0 /* QuestionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B1AFDFC7164751BF0068A0E0 /* QuestionDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,8 @@
 		B19FF10D163F7B6F0055A42A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B19FF10F163F7B790055A42A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		B19FF111163F81510055A42A /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		B1AFDFC6164751BF0068A0E0 /* QuestionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionDetailViewController.h; sourceTree = "<group>"; };
+		B1AFDFC7164751BF0068A0E0 /* QuestionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,9 +166,11 @@
 				87C89D6D163CCE7F00A39431 /* LoginViewController.m */,
 				B19850491642473900DE9035 /* CategoryTableViewController.h */,
 				B198504A1642473900DE9035 /* CategoryTableViewController.m */,
-				87C89D36163CAF2900A39431 /* Supporting Files */,
-				879F145E1645E3660001815A /* CategoryQuestionsTableViewController.h */,
 				879F145F1645E3660001815A /* CategoryQuestionsTableViewController.m */,
+				879F145E1645E3660001815A /* CategoryQuestionsTableViewController.h */,
+				B1AFDFC6164751BF0068A0E0 /* QuestionDetailViewController.h */,
+				B1AFDFC7164751BF0068A0E0 /* QuestionDetailViewController.m */,
+				87C89D36163CAF2900A39431 /* Supporting Files */,
 			);
 			path = Questions;
 			sourceTree = "<group>";
@@ -268,6 +273,7 @@
 				87C89D6E163CCE7F00A39431 /* LoginViewController.m in Sources */,
 				B198504B1642473900DE9035 /* CategoryTableViewController.m in Sources */,
 				879F14601645E3660001815A /* CategoryQuestionsTableViewController.m in Sources */,
+				B1AFDFC8164751BF0068A0E0 /* QuestionDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
