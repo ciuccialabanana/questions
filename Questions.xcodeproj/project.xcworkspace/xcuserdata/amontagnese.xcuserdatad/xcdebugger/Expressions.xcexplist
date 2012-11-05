@@ -33,6 +33,9 @@
             <PersistentString
                value = "user.id">
             </PersistentString>
+            <PersistentString
+               value = "user.name">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState

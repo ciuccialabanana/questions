@@ -17,6 +17,7 @@
     [Parse setApplicationId:@"fqNqNeGBqtjp3pP6UNjWlIs2wejZoIFTGNbGNlQk"
                   clientKey:@"dpJ1k5cgnaY1thYIc6a5oluNzg0C4b76htAq8GwA"];
     // Override point for customization after application launch.
+    [FBProfilePictureView class];
     return YES;
 }
 							

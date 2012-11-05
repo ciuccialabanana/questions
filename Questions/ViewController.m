@@ -12,10 +12,13 @@
 
 @interface ViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
+    @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+    @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
 
-@property (weak, nonatomic)  NSDictionary<FBGraphUser> *user;
+    @property (strong, nonatomic) IBOutlet FBProfilePictureView *userProfileImage;
+
+
+    @property (weak, nonatomic)  NSDictionary<FBGraphUser> *user;
 
 @end
 
@@ -27,6 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     [self.loadingIndicator setHidesWhenStopped:YES];
     // TODO: check how to retrieve user information using new fb sdk
     if (FBSession.activeSession.isOpen) {
@@ -34,6 +38,7 @@
             self.user = user;
             [self.loadingIndicator stopAnimating];
             self.userNameLabel.text = user.name;
+            self.userProfileImage.profileID = user.id;
         }];
     }    
     

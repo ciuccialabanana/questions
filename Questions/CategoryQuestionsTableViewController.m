@@ -118,7 +118,8 @@
 - (void)markCell: (UITableViewCell *) cell AsAnswered:(NSString *)questionId{
     if ([self.questionsAnswersDictionary objectForKey:questionId]){
         //put a checkmark on answered questions (if exists a value associated to that key)
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        //TODO: substitute this with fb pic
+        cell.imageView.image = [UIImage imageNamed:@"Icon-72.png"];
     }
 }
 
