@@ -34,11 +34,11 @@
 	// Do any additional setup after loading the view.
 }
 
-- (void) createQuestionsAnswersDictionary{
-    NSArray *answers = [self getUserAnswers];
+- (void)createQuestionsAnswersDictionary:(NSArray *)result error:(NSError *)error
+{
     self.questionsAnswersDictionary = [NSMutableDictionary dictionary];
     
-    for (PFObject *answer in answers) {
+    for (PFObject *answer in result) {
         for (PFObject *question in self.objects) {
             BOOL match = [(NSString *)[answer objectForKey:@"questionId"] compare:[question objectId]] == NSOrderedSame;
             if (match) {
@@ -47,19 +47,19 @@
             }
             
         }
-        
     }
+    [self.tableView reloadData];
+    
 }
 
-- (NSArray *)getUserAnswers{
+- (void)getUserAnswers{
     
     //TODO: add filter on userId
     PFQuery *query = [PFQuery queryWithClassName:@"UserAnswer"];
     [query whereKey:@"categoryId" equalTo:self.categoryId];
     
     //TODO: add cache
-    return [query findObjects];
-
+    [query findObjectsInBackgroundWithTarget:self selector:@selector(createQuestionsAnswersDictionary:error:)];
 
 }
 
@@ -77,6 +77,20 @@
     [query orderByAscending:@"createdAt"];
     
     return query;
+}
+
+- (void)objectsDidLoad:(NSError *)error
+{
+    [super objectsDidLoad:error];
+    
+    if (error) {
+        NSLog(@"ERROR LAODING OBJECTS");
+        return;
+    }
+    
+    [self getUserAnswers];
+
+    
 }
 
 
@@ -97,7 +111,7 @@
     
     //TODO IMPORTANT: put this when once and for all when the table is loaded. This way it creates a dictionary for
     //all the cells of the table. No need of doing this, I don't know at which point I m sure the table is loaded
-    [self createQuestionsAnswersDictionary];
+//    [self createQuestionsAnswersDictionary];
 
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
