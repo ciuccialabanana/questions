@@ -10,5 +10,6 @@
 #import <FacebookSDK/FacebookSDK.h>
 
 @interface ViewController : UIViewController <FBViewControllerDelegate>
+    -(IBAction)invitePartner;
 
 @end

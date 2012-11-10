@@ -13,25 +13,34 @@
 
 @interface ViewController ()
 
+    @property (nonatomic, strong) AppDelegate *globalVariables;
     @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
     @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
-
     @property (strong, nonatomic) IBOutlet FBProfilePictureView *userProfileImage;
-
-
     @property (weak, nonatomic)  NSDictionary<FBGraphUser> *user;
+    @property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
+    @property (strong, nonatomic) NSArray* selectedPartner;
 
 @end
 
 
 @implementation ViewController
 
+@synthesize globalVariables = _globalVariables;
 @synthesize user = _user;
+@synthesize friendPickerController = _friendPickerController;
+@synthesize selectedPartner = _selectedPartner;
+
+
+
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    self.globalVariables = [[UIApplication sharedApplication] delegate];
+ 
     [self.loadingIndicator setHidesWhenStopped:YES];
     // TODO: check how to retrieve user information using new fb sdk
     if (FBSession.activeSession.isOpen) {
@@ -43,8 +52,11 @@
             self.userProfileImage.profileID = user.id;
             
             //set the global userId
-            AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-            appDelegate.fbUserId = user.id;
+            self.globalVariables.fbUserId = user.id;
+            
+            PFQuery *globalUserQuery = [PFQuery queryWithClassName:@"User"];
+            self.globalVariables.user = [globalUserQuery getObjectWithId:self.globalVariables.userId];
+
             
             //save the user in the DB if it's not already present
             PFQuery *query = [PFQuery queryWithClassName:@"User"];
@@ -66,7 +78,7 @@
                     tempObject = object;
                 }
                 
-                appDelegate.userId = tempObject.objectId;
+                self.globalVariables.userId = tempObject.objectId;
                 
                 PFQuery *query1 = [PFQuery queryWithClassName:@"Couple"];
                 [query1 whereKey:@"user1Id" equalTo:user.id];
@@ -83,10 +95,10 @@
                     if (object) {
                         NSString *tempUser1Id = [object objectForKey:@"user1Id"];
                         NSString *tempUser2Id = [object objectForKey:@"user2Id"];
-                        if([tempUser1Id isEqualToString:appDelegate.userId]){
-                            appDelegate.partnerUserId = tempUser2Id;
+                        if([tempUser1Id isEqualToString:self.globalVariables.userId]){
+                            self.globalVariables.partnerUserId = tempUser2Id;
                         }else{
-                            appDelegate.partnerUserId = tempUser1Id;
+                            self.globalVariables.partnerUserId = tempUser1Id;
                         }
 
                     }else{
@@ -102,9 +114,80 @@
     
 }
 
+- (void)friendPickerViewControllerSelectionDidChange:
+(FBFriendPickerViewController *)friendPicker
+{
+    self.selectedPartner = friendPicker.selection;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+-(IBAction)invitePartner {
+    if (self.friendPickerController == nil) {
+        // Create friend picker, and get data loaded into it.
+        self.friendPickerController = [[FBFriendPickerViewController alloc] init];
+        self.friendPickerController.title = @"Select Friends";
+        self.friendPickerController.delegate = self;
+    }
+    [self.friendPickerController loadData];
+    [self.friendPickerController clearSelection];
+    self.friendPickerController.allowsMultipleSelection = NO;
+    [self presentModalViewController:self.friendPickerController animated:YES];
+}
+
+- (void)facebookViewControllerCancelWasPressed:(id)sender
+{
+    NSLog(@"Friend selection cancelled.");
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)facebookViewControllerDoneWasPressed:(id)sender
+{
+    for (id<FBGraphUser> user in self.friendPickerController.selection) {
+        NSLog(@"Friend selected: %@", user.name);
+        
+        //save the user in the DB if it's not already present
+        PFQuery *query = [PFQuery queryWithClassName:@"User"];
+        [query whereKey:@"fbUserId" equalTo:user.id];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            
+            //create a new user for the partner
+            PFObject *tempUser;
+            if (!object) {
+                NSLog(@"Creating new user.");
+                PFObject *newUserObject = [PFObject objectWithClassName:@"User"];
+                [newUserObject setObject:user.id forKey:@"fbUserId"];
+                [newUserObject setObject:user.name forKey:@"username"];
+                [newUserObject setObject:[NSNumber numberWithBool:YES] forKey:@"invitationSent"];
+                [newUserObject save];
+                tempUser = newUserObject;
+            } else {
+                // The find succeeded.
+                NSLog(@"Successfully retrieved the user.");
+                tempUser = object;
+            }
+            
+            //set the global partnerUserId
+            self.globalVariables.partnerUserId = tempUser.objectId;
+            
+            //Create the couple record
+            PFObject *newCoupleObject = [PFObject objectWithClassName:@"Couple"];
+            [newCoupleObject setObject:self.globalVariables.userId forKey:@"user1Id"];
+            [newCoupleObject setObject:self.globalVariables.partnerUserId forKey:@"user2Id"];
+            [newCoupleObject saveEventually];
+
+            //update the current user: set sentInvitation true
+            [self.globalVariables.user setObject:[NSNumber numberWithBool:YES] forKey:@"invitationSent"];
+            [self.globalVariables.user saveInBackground];
+        }];
+
+        
+        
+    }
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 

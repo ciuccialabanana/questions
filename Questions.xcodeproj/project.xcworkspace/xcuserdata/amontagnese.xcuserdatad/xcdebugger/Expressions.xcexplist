@@ -3,34 +3,7 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[CategoryQuestionsTableViewController getPartnerAnswers]:CategoryQuestionsTableViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.globalVariables">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[CategoryQuestionsTableViewController checkAnsweredQuestions]:CategoryQuestionsTableViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.tableView">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "-[CategoryQuestionsTableViewController getUserAnswers]:CategoryQuestionsTableViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "__block_global_1:ViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "appDelegate.userId">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[CategoriesViewController viewDidLoad]:CategoriesViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[CategoryQuestionsTableViewController prepareForSegue:sender:]:CategoryQuestionsTableViewController.m">
@@ -40,17 +13,6 @@
             </PersistentString>
             <PersistentString
                value = "self.tableView">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "__29-[ViewController viewDidLoad]_block_invoke_0:ViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "user.id">
-            </PersistentString>
-            <PersistentString
-               value = "user.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -69,7 +31,48 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[CategoryQuestionsTableViewController getPartnerAnswers]:CategoryQuestionsTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.globalVariables">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__29-[ViewController viewDidLoad]_block_invoke_0:ViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "user.id">
+            </PersistentString>
+            <PersistentString
+               value = "user.name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[CategoryQuestionsTableViewController checkAnsweredQuestions]:CategoryQuestionsTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tableView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[CategoriesViewController viewDidLoad]:CategoriesViewController.m">
+      </ContextState>
+      <ContextState
          contextName = "-[ViewController viewDidLoad]:ViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__55-[ViewController facebookViewControllerDoneWasPressed:]_block_invoke_0:ViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.globalVariables">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[QuestionDetailViewController tableView:cellForRowAtIndexPath:object:]:QuestionDetailViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[CategoryQuestionsTableViewController createQuestionsAnswersDictionary]:CategoryQuestionsTableViewController.m">
@@ -83,7 +86,12 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[QuestionDetailViewController tableView:cellForRowAtIndexPath:object:]:QuestionDetailViewController.m">
+         contextName = "__block_global_1:ViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "appDelegate.userId">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>
