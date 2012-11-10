@@ -7,21 +7,25 @@
 //
 
 #import "QuestionDetailViewController.h"
+#import "AppDelegate.h"
 
 @interface QuestionDetailViewController ()
 
     @property (weak, nonatomic) IBOutlet UILabel *questionLabel;
+//    @property (nonatomic, strong) AppDelegate *globalVariables;
 
 @end
 
 @implementation QuestionDetailViewController
 
 @synthesize question = _question;
-@synthesize answer = _answer;
-
+@synthesize userAnswer = _userAnswer;
+@synthesize partnerAnswer = _partnerAnswer;
+//@synthesize globalVariables = _globalVariables;
 
 - (void)viewDidLoad
 {
+//    self.globalVariables = [[UIApplication sharedApplication] delegate];
     self.className = @"Answer";
     self.pullToRefreshEnabled = YES;
     self.paginationEnabled = YES;
@@ -74,8 +78,14 @@
 
     cell.textLabel.text = [object objectForKey:@"text"];
     
-    if ([object.objectId compare:[self.answer valueForKey:@"answerId"]] == NSOrderedSame) {
+    if ([object.objectId compare:[self.userAnswer valueForKey:@"answerId"]] == NSOrderedSame) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    
+    if ([object.objectId compare:[self.partnerAnswer valueForKey:@"answerId"]] == NSOrderedSame) {
+        //TODO mark as answered by partner
+        [cell setBackgroundColor:[UIColor colorWithRed:1 green:0 blue:0 alpha:1]];
+        NSLog(@" Partner Answer: %@", self.partnerAnswer);
     }
     
     return cell;
@@ -88,20 +98,22 @@
     PFObject *selectedAnswer = [self objectAtIndexPath:indexPath];
 
     //store the selected answer
-    if (self.answer){
+    if (self.userAnswer){
         //the user has previously answered to this question
-        [self.answer setObject:selectedAnswer.objectId forKey:@"answerId"];
-        [self.answer saveInBackground];
+        [self.userAnswer setObject:selectedAnswer.objectId forKey:@"answerId"];
+        [self.userAnswer saveInBackground];
     }else{
-        //first time the user answers, a new record in UserAnswer needs to be created
-        self.answer = [PFObject objectWithClassName:@"UserAnswer"];
-        [self.answer setObject:selectedAnswer.objectId forKey:@"answerId"];
-        [self.answer setObject:[self.question valueForKey:@"categoryId"] forKey:@"categoryId"];
-        [self.answer setObject:self.question.objectId forKey:@"questionId"];
-        //TODO: set userId
-        //[self.answer setObject:user.id forKey:@"userId"];
         
-        [self.answer saveInBackground];
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        
+        //first time the user answers, a new record in UserAnswer needs to be created
+        self.userAnswer = [PFObject objectWithClassName:@"UserAnswer"];
+        [self.userAnswer setObject:selectedAnswer.objectId forKey:@"answerId"];
+        [self.userAnswer setObject:[self.question valueForKey:@"categoryId"] forKey:@"categoryId"];
+        [self.userAnswer setObject:self.question.objectId forKey:@"questionId"];
+        [self.userAnswer setObject:appDelegate.userId forKey:@"userId"];
+        
+        [self.userAnswer saveInBackground];
     }
     
     

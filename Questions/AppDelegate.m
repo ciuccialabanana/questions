@@ -12,6 +12,10 @@
 
 @implementation AppDelegate
 
+@synthesize fbUserId;
+@synthesize userId;
+@synthesize partnerUserId;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [Parse setApplicationId:@"fqNqNeGBqtjp3pP6UNjWlIs2wejZoIFTGNbGNlQk"
@@ -41,6 +45,9 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [FBSession.activeSession handleDidBecomeActive];
+    userId = [[NSString alloc]init];
+    fbUserId = [[NSString alloc]init];
+    partnerUserId = [[NSString alloc]init];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

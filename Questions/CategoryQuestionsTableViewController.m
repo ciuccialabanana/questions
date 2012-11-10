@@ -8,17 +8,25 @@
 
 #import "CategoryQuestionsTableViewController.h"
 #import "QuestionDetailViewController.h"
+#import "AppDelegate.h"
 
 @interface CategoryQuestionsTableViewController ()
     @property (nonatomic, strong) PFObject *currentQuestion;
-    @property (nonatomic, strong) NSMutableDictionary *questionsAnswersDictionary;
+    @property (nonatomic, strong) NSMutableDictionary *userAnswersDictionary;
+    @property (nonatomic, strong) NSMutableDictionary *partnerAnswersDictionary;
+    @property (nonatomic, strong) AppDelegate *globalVariables;
+
+
 @end
 
 @implementation CategoryQuestionsTableViewController
 
 @synthesize categoryId = _categoryId;
+@synthesize globalVariables = _globalVariables;
 @synthesize currentQuestion = _currentQuestion;
-@synthesize questionsAnswersDictionary = _dictionary;
+@synthesize userAnswersDictionary = _userAnswersDictionary;
+@synthesize partnerAnswersDictionary = _partnerAnswersDictionary;
+
 
 
 
@@ -28,6 +36,10 @@
     self.pullToRefreshEnabled = YES;
     self.paginationEnabled = YES;
     self.objectsPerPage = 5;
+
+    self.globalVariables = [[UIApplication sharedApplication] delegate];
+
+    
     
     [super viewDidLoad];
     
@@ -36,14 +48,14 @@
 
 - (void)createQuestionsAnswersDictionary:(NSArray *)result error:(NSError *)error
 {
-    self.questionsAnswersDictionary = [NSMutableDictionary dictionary];
+    self.userAnswersDictionary = [NSMutableDictionary dictionary];
     
     for (PFObject *answer in result) {
         for (PFObject *question in self.objects) {
             BOOL match = [(NSString *)[answer objectForKey:@"questionId"] compare:[question objectId]] == NSOrderedSame;
             if (match) {
 
-                [self.questionsAnswersDictionary setObject:answer forKey:question.objectId];
+                [self.userAnswersDictionary setObject:answer forKey:question.objectId];
             }
             
         }
@@ -57,10 +69,43 @@
     //TODO: add filter on userId
     PFQuery *query = [PFQuery queryWithClassName:@"UserAnswer"];
     [query whereKey:@"categoryId" equalTo:self.categoryId];
+    [query whereKey:@"userId" equalTo:self.globalVariables.userId];
     
     //TODO: add cache
     [query findObjectsInBackgroundWithTarget:self selector:@selector(createQuestionsAnswersDictionary:error:)];
+    
+}
 
+- (void)getPartnerAnswers{
+    
+    //TODO: add filter on userId
+    PFQuery *query = [PFQuery queryWithClassName:@"UserAnswer"];
+    [query whereKey:@"categoryId" equalTo:self.categoryId];
+    [query whereKey:@"userId" equalTo:self.globalVariables.partnerUserId];
+    
+    //TODO: add cache and add method
+    [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
+        if (!results){
+            NSLog(@"No partner answers found");
+        }else{
+            self.partnerAnswersDictionary = [NSMutableDictionary dictionary];
+            
+            for (PFObject *answer in results) {
+                for (PFObject *question in self.objects) {
+                    BOOL match = [(NSString *)[answer objectForKey:@"questionId"] compare:[question objectId]] == NSOrderedSame;
+                    if (match) {
+                        [self.partnerAnswersDictionary setObject:answer forKey:question.objectId];
+                        NSLog(@"Storing partner answer: %@ for question %@", answer, question.objectId );
+                    }
+                    
+                }
+            }
+            [self.tableView reloadData];
+            
+        }
+    }];
+    
+    
 }
 
 
@@ -89,6 +134,7 @@
     }
     
     [self getUserAnswers];
+    [self getPartnerAnswers];
 
     
 }
@@ -130,7 +176,7 @@
 }
 
 - (void)markCell: (UITableViewCell *) cell AsAnswered:(NSString *)questionId{
-    if ([self.questionsAnswersDictionary objectForKey:questionId]){
+    if ([self.userAnswersDictionary objectForKey:questionId]){
         //put a checkmark on answered questions (if exists a value associated to that key)
         //TODO: substitute this with fb pic
         cell.imageView.image = [UIImage imageNamed:@"Icon-72.png"];
@@ -153,7 +199,8 @@
         if ([segue.destinationViewController isKindOfClass:[QuestionDetailViewController class]]) {
             QuestionDetailViewController *destination = segue.destinationViewController;
             destination.question = self.currentQuestion;
-            destination.answer = [self.questionsAnswersDictionary valueForKey:self.currentQuestion.objectId];
+            destination.userAnswer = [self.userAnswersDictionary valueForKey:self.currentQuestion.objectId];
+            destination.partnerAnswer = [self.partnerAnswersDictionary valueForKey:self.currentQuestion.objectId];
         }
         
     }
