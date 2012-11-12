@@ -13,6 +13,7 @@
 @implementation AppDelegate
 
 @synthesize fbUserId;
+@synthesize fbPartnerId;
 @synthesize userId;
 @synthesize partnerUserId;
 @synthesize user;

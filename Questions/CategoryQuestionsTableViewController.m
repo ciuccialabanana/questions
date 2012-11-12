@@ -9,6 +9,7 @@
 #import "CategoryQuestionsTableViewController.h"
 #import "QuestionDetailViewController.h"
 #import "AppDelegate.h"
+#import "questionCell.h"
 
 @interface CategoryQuestionsTableViewController ()
     @property (nonatomic, strong) PFObject *currentQuestion;
@@ -153,33 +154,32 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
                         object:(PFObject *)object {
     static NSString *CellIdentifier = @"QuestionCell";
-    
-    
-    //TODO IMPORTANT: put this when once and for all when the table is loaded. This way it creates a dictionary for
-    //all the cells of the table. No need of doing this, I don't know at which point I m sure the table is loaded
-//    [self createQuestionsAnswersDictionary];
 
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    questionCell *cell = (questionCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                      reuseIdentifier:CellIdentifier];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"questionCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
     }
     
     // Configure the cell to show todo item with a priority at the bottom
-    cell.textLabel.text = [object objectForKey:@"question"];
-    cell.detailTextLabel.text = @"Complete/To do";
+    cell.questionText.text = [object objectForKey:@"question"];
+    
+    cell.userProfileImage.hidden = YES;
+    cell.partnerProfileImage.hidden = YES;
     
     [self markCell:cell AsAnswered:object.objectId];
     
     return cell;
 }
 
-- (void)markCell: (UITableViewCell *) cell AsAnswered:(NSString *)questionId{
+- (void)markCell: (questionCell *) cell AsAnswered:(NSString *)questionId{
     if ([self.userAnswersDictionary objectForKey:questionId]){
-        //put a checkmark on answered questions (if exists a value associated to that key)
-        //TODO: substitute this with fb pic
-        cell.imageView.image = [UIImage imageNamed:@"Icon-72.png"];
+        cell.userProfileImage.hidden = NO;
+        cell.userProfileImage.profileID = self.globalVariables.fbUserId;
+    }
+    if ([self.partnerAnswersDictionary objectForKey:questionId]){
+        cell.partnerProfileImage.hidden = NO;
+        cell.partnerProfileImage.profileID = self.globalVariables.fbPartnerId;
     }
 }
 
@@ -204,6 +204,19 @@
         }
         
     }
+}
+
+//reload table when user navigates back from the single question view
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self getUserAnswers];
+    [self getPartnerAnswers];
+    [self.tableView reloadData];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 79;
 }
 
 

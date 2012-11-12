@@ -8,11 +8,12 @@
 
 #import "QuestionDetailViewController.h"
 #import "AppDelegate.h"
+#import "questionCell.h"
 
 @interface QuestionDetailViewController ()
 
     @property (weak, nonatomic) IBOutlet UILabel *questionLabel;
-//    @property (nonatomic, strong) AppDelegate *globalVariables;
+    @property (nonatomic, strong) AppDelegate *globalVariables;
 
 @end
 
@@ -21,11 +22,11 @@
 @synthesize question = _question;
 @synthesize userAnswer = _userAnswer;
 @synthesize partnerAnswer = _partnerAnswer;
-//@synthesize globalVariables = _globalVariables;
+@synthesize globalVariables = _globalVariables;
 
 - (void)viewDidLoad
 {
-//    self.globalVariables = [[UIApplication sharedApplication] delegate];
+    self.globalVariables = [[UIApplication sharedApplication] delegate];
     self.className = @"Answer";
     self.pullToRefreshEnabled = YES;
     self.paginationEnabled = YES;
@@ -68,27 +69,40 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
                         object:(PFObject *)object {
-    static NSString *CellIdentifier = @"AnswerCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    
+    static NSString *CellIdentifier = @"QuestionCell";
+    
+    questionCell *cell = (questionCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                      reuseIdentifier:CellIdentifier];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"questionCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
     }
-
-    cell.textLabel.text = [object objectForKey:@"text"];
+    
+    //init pics as hidden
+    cell.userProfileImage.hidden = YES;
+    cell.partnerProfileImage.hidden = YES;
+    
+    // Configure the cell to show todo item with a priority at the bottom
+    cell.questionText.text = [object objectForKey:@"text"];
     
     if ([object.objectId compare:[self.userAnswer valueForKey:@"answerId"]] == NSOrderedSame) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        cell.userProfileImage.hidden = NO;
+        cell.userProfileImage.profileID = self.globalVariables.fbUserId;
+
     }
+
     
     if ([object.objectId compare:[self.partnerAnswer valueForKey:@"answerId"]] == NSOrderedSame) {
         //TODO mark as answered by partner
-        [cell setBackgroundColor:[UIColor colorWithRed:1 green:0 blue:0 alpha:1]];
-        NSLog(@" Partner Answer: %@", self.partnerAnswer);
+        cell.partnerProfileImage.hidden = NO;
+        cell.partnerProfileImage.profileID = self.globalVariables.fbPartnerId;
+        //NSLog(@" Partner Answer: %@", self.partnerAnswer);
     }
-    
+        
     return cell;
+
 }
 
 #pragma mark - Table view delegate
@@ -129,6 +143,12 @@
     
     
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 79;
+}
+
 
 
 @end

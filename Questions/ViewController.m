@@ -67,7 +67,6 @@
                 if (!object) {
                     NSLog(@"Creating new user.");
                     PFObject *newUserObject = [PFObject objectWithClassName:@"User"];
-                    //                [newUserObject setObjectId:user.id];
                     [newUserObject setObject:user.id forKey:@"fbUserId"];
                     [newUserObject setObject:user.name forKey:@"username"];
                     [newUserObject saveEventually];
@@ -104,7 +103,11 @@
                     }else{
                         NSLog(@"No couple found");
                     }
-                
+                    
+                    PFQuery *queryForPartnerFbId = [PFQuery queryWithClassName:@"User"];
+                    PFObject *partner = [queryForPartnerFbId getObjectWithId:self.globalVariables.partnerUserId];
+                    self.globalVariables.fbPartnerId = [partner objectForKey:@"fbUserId"];
+            
                 }];
             }];
     

@@ -8,22 +8,22 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Questions/ViewController.m"
-         timestampString = "374243900.067335"
+         timestampString = "374384986.026389"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "254"
-         endingLineNumber = "254">
+         startingLineNumber = "256"
+         endingLineNumber = "256">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Questions/ViewController.m"
-         timestampString = "374243900.067335"
+         timestampString = "374384986.026389"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "211"
-         endingLineNumber = "211">
+         startingLineNumber = "213"
+         endingLineNumber = "213">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -36,32 +36,6 @@
          startingLineNumber = "78"
          endingLineNumber = "78"
          landmarkName = "-tableView:numberOfRowsInSection:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Questions/ViewController.m"
-         timestampString = "374242204.123497"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "165"
-         endingLineNumber = "165"
-         landmarkName = "-facebookViewControllerDoneWasPressed:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Questions/ViewController.m"
-         timestampString = "374242206.391436"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "169"
-         endingLineNumber = "169"
-         landmarkName = "-facebookViewControllerDoneWasPressed:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
