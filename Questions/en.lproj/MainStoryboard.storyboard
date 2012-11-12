@@ -290,6 +290,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="C5K-xG-TU9"/>
                     <connections>
+                        <outlet property="invitePartnerButton" destination="s4D-33-5XN" id="JMa-hJ-grg"/>
                         <outlet property="loadingIndicator" destination="ueM-ud-BaW" id="ZaQ-mC-SR3"/>
                         <outlet property="userNameLabel" destination="d9E-8Q-j1w" id="hH4-Nm-v1K"/>
                         <outlet property="userProfileImage" destination="vfL-pV-F0O" id="39w-bu-Rf8"/>
@@ -372,6 +373,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
             <relationships>
                 <relationship kind="action" name="invitePartner"/>
+                <relationship kind="outlet" name="invitePartnerButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="userNameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="userProfileImage" candidateClass="FBProfilePictureView"/>

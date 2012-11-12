@@ -20,6 +20,7 @@
     @property (weak, nonatomic)  NSDictionary<FBGraphUser> *user;
     @property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
     @property (strong, nonatomic) NSArray* selectedPartner;
+    @property (weak, nonatomic) IBOutlet UIButton *invitePartnerButton;
 
 @end
 
@@ -30,6 +31,7 @@
 @synthesize user = _user;
 @synthesize friendPickerController = _friendPickerController;
 @synthesize selectedPartner = _selectedPartner;
+@synthesize invitePartnerButton = _invitePartnerButton;
 
 
 
@@ -54,8 +56,6 @@
             //set the global userId
             self.globalVariables.fbUserId = user.id;
             
-            PFQuery *globalUserQuery = [PFQuery queryWithClassName:@"User"];
-            self.globalVariables.user = [globalUserQuery getObjectWithId:self.globalVariables.userId];
 
             
             //save the user in the DB if it's not already present
@@ -78,6 +78,7 @@
                 }
                 
                 self.globalVariables.userId = tempObject.objectId;
+                self.globalVariables.user = tempObject;
                 
                 PFQuery *query1 = [PFQuery queryWithClassName:@"Couple"];
                 [query1 whereKey:@"user1Id" equalTo:user.id];
@@ -99,10 +100,14 @@
                         }else{
                             self.globalVariables.partnerUserId = tempUser1Id;
                         }
+                        //hide send invitation
+                        self.invitePartnerButton.hidden = YES;
+                        
 
                     }else{
                         NSLog(@"No couple found");
                     }
+                    
                     
                     PFQuery *queryForPartnerFbId = [PFQuery queryWithClassName:@"User"];
                     PFObject *partner = [queryForPartnerFbId getObjectWithId:self.globalVariables.partnerUserId];
