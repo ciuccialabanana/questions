@@ -44,6 +44,10 @@
     self.globalVariables = [[UIApplication sharedApplication] delegate];
  
     [self.loadingIndicator setHidesWhenStopped:YES];
+
+    //hide send invitation
+    self.invitePartnerButton.hidden = YES;
+    
     // TODO: check how to retrieve user information using new fb sdk
     if (FBSession.activeSession.isOpen) {
         [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
@@ -61,10 +65,10 @@
             //save the user in the DB if it's not already present
             PFQuery *query = [PFQuery queryWithClassName:@"User"];
             [query whereKey:@"fbUserId" equalTo:user.id];
-            [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            NSArray* objects = [query findObjects];
                 
                 PFObject *tempObject;
-                if (!object) {
+                if (objects.count == 0) {
                     NSLog(@"Creating new user.");
                     PFObject *newUserObject = [PFObject objectWithClassName:@"User"];
                     [newUserObject setObject:user.id forKey:@"fbUserId"];
@@ -74,7 +78,7 @@
                 } else {
                     // The find succeeded.
                     NSLog(@"Successfully retrieved the user.");
-                    tempObject = object;
+                    tempObject = objects[0];
                 }
                 
                 self.globalVariables.userId = tempObject.objectId;
@@ -100,25 +104,29 @@
                         }else{
                             self.globalVariables.partnerUserId = tempUser1Id;
                         }
-                        //hide send invitation
-                        self.invitePartnerButton.hidden = YES;
+
                         
 
                     }else{
                         NSLog(@"No couple found");
+                        //show send invitation
+                        self.invitePartnerButton.hidden = NO;
                     }
                     
                     
                     PFQuery *queryForPartnerFbId = [PFQuery queryWithClassName:@"User"];
                     PFObject *partner = [queryForPartnerFbId getObjectWithId:self.globalVariables.partnerUserId];
                     self.globalVariables.fbPartnerId = [partner objectForKey:@"fbUserId"];
+                    
+                    //TODO: doesn't work
+                    //[self postToFB];
             
                 }];
-            }];
-    
+
             
         }];
-    }    
+    }
+
     
 }
 
@@ -145,6 +153,68 @@
     self.friendPickerController.allowsMultipleSelection = NO;
     [self presentModalViewController:self.friendPickerController animated:YES];
 }
+
+- (void) postToFB
+{
+
+    __block BOOL canPublish = NO;
+    // Ask for publish_actions permissions in context
+    if ([FBSession.activeSession.permissions
+         indexOfObject:@"publish_actions"] == NSNotFound) {
+        // No permissions found in session, ask for it
+        [FBSession.activeSession
+         reauthorizeWithPublishPermissions:
+         [NSArray arrayWithObject:@"publish_actions"]
+         defaultAudience:FBSessionDefaultAudienceFriends
+         completionHandler:^(FBSession *session, NSError *error) {
+             if (!error) {
+                 // If permissions granted, publish the story
+                 canPublish = YES;
+             }
+         }];
+    } else {
+        // If permissions present, publish the story
+         canPublish = YES;
+    }
+    
+    if (canPublish){
+        NSMutableDictionary *postParams =
+        [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+         @"https://developers.facebook.com/ios", @"link",
+         @"https://developers.facebook.com/attachment/iossdk_logo.png", @"picture",
+         @"Facebook SDK for iOS", @"name",
+         @"Build great social apps and get more installs.", @"caption",
+         @"The Facebook SDK for iOS makes it easier and faster to develop Facebook integrated iOS apps.", @"description",
+         nil];
+        [FBRequestConnection
+         startWithGraphPath:[self.globalVariables.fbPartnerId stringByAppendingString:@"/feed"]
+         parameters:postParams
+         HTTPMethod:@"POST"
+         completionHandler:^(FBRequestConnection *connection,
+                             id result,
+                             NSError *error) {
+             NSString *alertText;
+             if (error) {
+                 alertText = [NSString stringWithFormat:
+                              @"error: domain = %@, code = %d",
+                              error.domain, error.code];
+             } else {
+                 alertText = [NSString stringWithFormat:
+                              @"Posted action, id: %@",
+                              [result objectForKey:@"id"]];
+             }
+             // Show the result in an alert
+             [[[UIAlertView alloc] initWithTitle:@"Result"
+                                         message:alertText
+                                        delegate:self
+                               cancelButtonTitle:@"OK!"
+                               otherButtonTitles:nil]
+              show];
+         }];
+    }
+}
+
+
 
 - (void)facebookViewControllerCancelWasPressed:(id)sender
 {
@@ -183,7 +253,7 @@
             
             //Create the couple record
             PFObject *newCoupleObject = [PFObject objectWithClassName:@"Couple"];
-            [newCoupleObject setObject:self.globalVariables.userId forKey:@"user1Id"];
+            [newCoupleObject setObject:self.globalVariables.user.objectId forKey:@"user1Id"];
             [newCoupleObject setObject:self.globalVariables.partnerUserId forKey:@"user2Id"];
             [newCoupleObject saveEventually];
 
@@ -195,6 +265,7 @@
         
         
     }
+
     [self dismissModalViewControllerAnimated:YES];
 }
 

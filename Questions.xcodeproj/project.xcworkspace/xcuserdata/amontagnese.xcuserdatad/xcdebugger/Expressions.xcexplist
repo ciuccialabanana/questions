@@ -62,6 +62,11 @@
       </ContextState>
       <ContextState
          contextName = "-[ViewController viewDidLoad]:ViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.globalVariables">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "__55-[ViewController facebookViewControllerDoneWasPressed:]_block_invoke_0:ViewController.m">
@@ -90,6 +95,9 @@
          <PersistentStrings>
             <PersistentString
                value = "appDelegate.userId">
+            </PersistentString>
+            <PersistentString
+               value = "self.globalVariables">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
