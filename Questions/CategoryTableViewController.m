@@ -13,14 +13,14 @@
 
 @interface CategoryTableViewController ()
 
-@property (nonatomic, strong) NSNumber *currentCategoryId;
+@property (nonatomic, strong) NSString *currentCategoryId;
 
 @end
 
 
 @implementation CategoryTableViewController
 
-@synthesize currentCategoryId = _currentCategoryId;
+//@synthesize currentCategoryId = _currentCategoryId;
 
 - (void)viewDidLoad
 {
@@ -83,7 +83,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.currentCategoryId = [[self objectAtIndexPath:indexPath] objectForKey:@"orderId"];
+    self.currentCategoryId = [[self objectAtIndexPath:indexPath] objectId];
     [self performSegueWithIdentifier:@"goToCategoryQuestions" sender:[self.tableView cellForRowAtIndexPath:indexPath]];
     
 }

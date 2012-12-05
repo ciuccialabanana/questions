@@ -20,7 +20,6 @@
 
 @property (nonatomic, weak) id<facebookDelegate> delegate;
 
-
 + (id)sharedInstance;
 
 - (void)openSession;

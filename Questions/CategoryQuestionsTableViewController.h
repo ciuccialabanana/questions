@@ -10,6 +10,6 @@
 
 @interface CategoryQuestionsTableViewController : PFQueryTableViewController
 
-@property (nonatomic, strong) NSNumber *categoryId;
+@property (nonatomic, strong) NSString *categoryId;
 
 @end

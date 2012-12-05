@@ -8,25 +8,24 @@
 
 #import "QuestionDetailViewController.h"
 #import "AppDelegate.h"
-#import "questionCell.h"
 
 @interface QuestionDetailViewController ()
 
-    @property (weak, nonatomic) IBOutlet UILabel *questionLabel;
-    @property (nonatomic, strong) AppDelegate *globalVariables;
+@property (weak, nonatomic) IBOutlet UILabel *questionLabel;
+//@property (nonatomic, strong) AppDelegate *globalVariables;
 
 @end
 
 @implementation QuestionDetailViewController
 
-@synthesize question = _question;
-@synthesize userAnswer = _userAnswer;
-@synthesize partnerAnswer = _partnerAnswer;
-@synthesize globalVariables = _globalVariables;
+//@synthesize question = _question;
+//@synthesize userAnswer = _userAnswer;
+//@synthesize partnerAnswer = _partnerAnswer;
+//@synthesize globalVariables = _globalVariables;
 
 - (void)viewDidLoad
 {
-    self.globalVariables = [[UIApplication sharedApplication] delegate];
+//    self.globalVariables = [[UIApplication sharedApplication] delegate];
     self.className = @"Answer";
     self.pullToRefreshEnabled = YES;
     self.paginationEnabled = YES;
@@ -69,40 +68,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
                         object:(PFObject *)object {
+
+    static NSString *CellIdentifier = @"AnswerCell";
     
-    
-    
-    static NSString *CellIdentifier = @"QuestionCell";
-    
-    questionCell *cell = (questionCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"questionCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    
-    //init pics as hidden
-    cell.userProfileImage.hidden = YES;
-    cell.partnerProfileImage.hidden = YES;
-    
-    // Configure the cell to show todo item with a priority at the bottom
-    cell.questionText.text = [object objectForKey:@"text"];
-    
-    if ([object.objectId compare:[self.userAnswer valueForKey:@"answerId"]] == NSOrderedSame) {
-        cell.userProfileImage.hidden = NO;
-        cell.userProfileImage.profileID = self.globalVariables.fbUserId;
+    cell.textLabel.text = [object objectForKey:@"text"];
+    cell.detailTextLabel.text = object.objectId;
 
-    }
-
-    
-    if ([object.objectId compare:[self.partnerAnswer valueForKey:@"answerId"]] == NSOrderedSame) {
-        //TODO mark as answered by partner
-        cell.partnerProfileImage.hidden = NO;
-        cell.partnerProfileImage.profileID = self.globalVariables.fbPartnerId;
-        //NSLog(@" Partner Answer: %@", self.partnerAnswer);
-    }
-        
     return cell;
-
 }
 
 #pragma mark - Table view delegate
@@ -115,38 +91,24 @@
     if (self.userAnswer){
         //the user has previously answered to this question
         [self.userAnswer setObject:selectedAnswer.objectId forKey:@"answerId"];
-        [self.userAnswer saveInBackground];
     }else{
-        
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        
         //first time the user answers, a new record in UserAnswer needs to be created
         self.userAnswer = [PFObject objectWithClassName:@"UserAnswer"];
         [self.userAnswer setObject:selectedAnswer.objectId forKey:@"answerId"];
         [self.userAnswer setObject:[self.question valueForKey:@"categoryId"] forKey:@"categoryId"];
         [self.userAnswer setObject:self.question.objectId forKey:@"questionId"];
-        [self.userAnswer setObject:appDelegate.userId forKey:@"userId"];
-        
         [self.userAnswer saveInBackground];
+//        [self.userAnswer setObject:appDelegate.userId forKey:@"userId"];
     }
+    
     
     
     //go back to the list of questions
     [self.navigationController popViewControllerAnimated:YES];
     
-//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//    if (cell.accessoryType != UITableViewCellAccessoryNone) {
-//        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-//    } else {
-//        cell.accessoryType = UITableViewCellAccessoryNone;
-//    }
-    
-    
-}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 79;
+    
+    
 }
 
 

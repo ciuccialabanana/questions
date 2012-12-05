@@ -12,20 +12,13 @@
 
 @implementation AppDelegate
 
-@synthesize fbUserId;
-@synthesize fbPartnerId;
-@synthesize userId;
-@synthesize partnerUserId;
-@synthesize user;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     [Parse setApplicationId:@"fqNqNeGBqtjp3pP6UNjWlIs2wejZoIFTGNbGNlQk"
                   clientKey:@"dpJ1k5cgnaY1thYIc6a5oluNzg0C4b76htAq8GwA"];
     // Override point for customization after application launch.
-    [FBProfilePictureView class];
     return YES;
 }
 
@@ -49,9 +42,6 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [FBSession.activeSession handleDidBecomeActive];
-    userId = [[NSString alloc]init];
-    fbUserId = [[NSString alloc]init];
-    partnerUserId = [[NSString alloc]init];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -67,7 +57,8 @@
     return [FBSession.activeSession handleOpenURL:url];
 }
 
-void uncaughtExceptionHandler(NSException *exception) {
+void uncaughtExceptionHandler(NSException *exception)
+{
     NSLog(@"CRASH: %@", exception);
     NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
     // Internal error reporting

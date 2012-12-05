@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8769F4B8166F1F3E0007EB00 /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8769F4B7166F1F3E0007EB00 /* Storage.m */; };
 		879F14601645E3660001815A /* CategoryQuestionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 879F145F1645E3660001815A /* CategoryQuestionsTableViewController.m */; };
+		87A91196165DDFB7000C6FAF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A91195165DDFB7000C6FAF /* User.m */; };
+		87A9119A165E02AE000C6FAF /* QuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A91199165E02AD000C6FAF /* QuestionCell.m */; };
 		87C89D30163CAF2900A39431 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C89D2F163CAF2900A39431 /* UIKit.framework */; };
 		87C89D32163CAF2900A39431 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C89D31163CAF2900A39431 /* Foundation.framework */; };
 		87C89D34163CAF2900A39431 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C89D33163CAF2900A39431 /* CoreGraphics.framework */; };
@@ -39,13 +42,17 @@
 		B19FF112163F81510055A42A /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = B19FF111163F81510055A42A /* Icon-72.png */; };
 		B1A838EF1647D79700764CC4 /* splashScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = B1A838EE1647D79700764CC4 /* splashScreen.png */; };
 		B1AFDFC8164751BF0068A0E0 /* QuestionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B1AFDFC7164751BF0068A0E0 /* QuestionDetailViewController.m */; };
-		B1FAA3B916509A7500D62CA0 /* questionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1FAA3B816509A7500D62CA0 /* questionCell.xib */; };
-		B1FAA3BC16509B8E00D62CA0 /* questionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FAA3BB16509B8D00D62CA0 /* questionCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8769F4B6166F1F3E0007EB00 /* Storage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Storage.h; sourceTree = "<group>"; };
+		8769F4B7166F1F3E0007EB00 /* Storage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Storage.m; sourceTree = "<group>"; };
 		879F145E1645E3660001815A /* CategoryQuestionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryQuestionsTableViewController.h; sourceTree = "<group>"; };
 		879F145F1645E3660001815A /* CategoryQuestionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryQuestionsTableViewController.m; sourceTree = "<group>"; };
+		87A91194165DDFB7000C6FAF /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		87A91195165DDFB7000C6FAF /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		87A91198165E02AD000C6FAF /* QuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionCell.h; sourceTree = "<group>"; };
+		87A91199165E02AD000C6FAF /* QuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionCell.m; sourceTree = "<group>"; };
 		87C89D2B163CAF2900A39431 /* Questions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Questions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87C89D2F163CAF2900A39431 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		87C89D31163CAF2900A39431 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -82,13 +89,10 @@
 		B19FF10B163F7B640055A42A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		B19FF10D163F7B6F0055A42A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B19FF10F163F7B790055A42A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		B19FF111163F81510055A42A /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		B19FF111163F81510055A42A /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../../Icon-72.png"; sourceTree = "<group>"; };
 		B1A838EE1647D79700764CC4 /* splashScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splashScreen.png; sourceTree = "<group>"; };
 		B1AFDFC6164751BF0068A0E0 /* QuestionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionDetailViewController.h; sourceTree = "<group>"; };
 		B1AFDFC7164751BF0068A0E0 /* QuestionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionDetailViewController.m; sourceTree = "<group>"; };
-		B1FAA3B816509A7500D62CA0 /* questionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = questionCell.xib; sourceTree = "<group>"; };
-		B1FAA3BA16509B8D00D62CA0 /* questionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = questionCell.h; sourceTree = "<group>"; };
-		B1FAA3BB16509B8D00D62CA0 /* questionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = questionCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,10 +122,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		87C89D20163CAF2900A39431 = {
+		87A91193165DDF95000C6FAF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				87C89D5D163CB90600A39431 /* Facebook.h */,
+				87C89D5E163CB90600A39431 /* Facebook.m */,
+				87A91194165DDFB7000C6FAF /* User.h */,
+				87A91195165DDFB7000C6FAF /* User.m */,
+				8769F4B6166F1F3E0007EB00 /* Storage.h */,
+				8769F4B7166F1F3E0007EB00 /* Storage.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		87A91197165DF6B6000C6FAF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				B19FF111163F81510055A42A /* Icon-72.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		87C89D20163CAF2900A39431 = {
+			isa = PBXGroup;
+			children = (
 				87C89D35163CAF2900A39431 /* Questions */,
 				87C89D2E163CAF2900A39431 /* Frameworks */,
 				87C89D2C163CAF2900A39431 /* Products */,
@@ -164,7 +188,8 @@
 			isa = PBXGroup;
 			children = (
 				87C89D47163CAF2900A39431 /* MainStoryboard.storyboard */,
-				87C89D5C163CB6CE00A39431 /* IndiControllers */,
+				87A91197165DF6B6000C6FAF /* Resources */,
+				87A91193165DDF95000C6FAF /* Models */,
 				87C89D3E163CAF2900A39431 /* AppDelegate.h */,
 				87C89D3F163CAF2900A39431 /* AppDelegate.m */,
 				87C89D4A163CAF2900A39431 /* ViewController.h */,
@@ -173,13 +198,12 @@
 				87C89D6D163CCE7F00A39431 /* LoginViewController.m */,
 				B19850491642473900DE9035 /* CategoryTableViewController.h */,
 				B198504A1642473900DE9035 /* CategoryTableViewController.m */,
-				879F145F1645E3660001815A /* CategoryQuestionsTableViewController.m */,
-				B1FAA3B816509A7500D62CA0 /* questionCell.xib */,
-				B1FAA3BA16509B8D00D62CA0 /* questionCell.h */,
-				B1FAA3BB16509B8D00D62CA0 /* questionCell.m */,
 				879F145E1645E3660001815A /* CategoryQuestionsTableViewController.h */,
+				879F145F1645E3660001815A /* CategoryQuestionsTableViewController.m */,
 				B1AFDFC6164751BF0068A0E0 /* QuestionDetailViewController.h */,
 				B1AFDFC7164751BF0068A0E0 /* QuestionDetailViewController.m */,
+				87A91198165E02AD000C6FAF /* QuestionCell.h */,
+				87A91199165E02AD000C6FAF /* QuestionCell.m */,
 				87C89D36163CAF2900A39431 /* Supporting Files */,
 			);
 			path = Questions;
@@ -198,15 +222,6 @@
 				87C89D45163CAF2900A39431 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		87C89D5C163CB6CE00A39431 /* IndiControllers */ = {
-			isa = PBXGroup;
-			children = (
-				87C89D5D163CB90600A39431 /* Facebook.h */,
-				87C89D5E163CB90600A39431 /* Facebook.m */,
-			);
-			name = IndiControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,7 +283,6 @@
 				87C89D55163CB12F00A39431 /* FacebookSDKResources.bundle in Resources */,
 				B19FF112163F81510055A42A /* Icon-72.png in Resources */,
 				B1A838EF1647D79700764CC4 /* splashScreen.png in Resources */,
-				B1FAA3B916509A7500D62CA0 /* questionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,7 +301,9 @@
 				B198504B1642473900DE9035 /* CategoryTableViewController.m in Sources */,
 				879F14601645E3660001815A /* CategoryQuestionsTableViewController.m in Sources */,
 				B1AFDFC8164751BF0068A0E0 /* QuestionDetailViewController.m in Sources */,
-				B1FAA3BC16509B8E00D62CA0 /* questionCell.m in Sources */,
+				87A91196165DDFB7000C6FAF /* User.m in Sources */,
+				87A9119A165E02AE000C6FAF /* QuestionCell.m in Sources */,
+				8769F4B8166F1F3E0007EB00 /* Storage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
