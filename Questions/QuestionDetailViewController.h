@@ -8,10 +8,9 @@
 
 #import <Parse/Parse.h>
 
+
 @interface QuestionDetailViewController : PFQueryTableViewController
 
 @property (nonatomic, strong) PFObject *question;
-@property (nonatomic, strong) PFObject *userAnswer;
-@property (nonatomic, strong) PFObject *partnerAnswer;
 
 @end

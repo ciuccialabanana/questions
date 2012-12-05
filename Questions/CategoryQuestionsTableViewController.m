@@ -9,23 +9,18 @@
 #import "CategoryQuestionsTableViewController.h"
 #import "QuestionDetailViewController.h"
 #import "QuestionCell.h"
-
+#import "User.h"
+#import "Storage.h"
 
 @interface CategoryQuestionsTableViewController ()
 
 @property (nonatomic, strong) PFObject *currentQuestion;
-@property (nonatomic, strong) NSMutableDictionary *userAnswersDictionary;
-@property (nonatomic, strong) NSMutableDictionary *partnerAnswersDictionary;
-//@property (nonatomic, strong) AppDelegate *globalVariables;
+
+@property (nonatomic, weak) User *user;
 
 @end
 
 @implementation CategoryQuestionsTableViewController
-
-//@synthesize categoryId = _categoryId;
-//@synthesize currentQuestion = _currentQuestion;
-//@synthesize userAnswersDictionary = _userAnswersDictionary;
-//@synthesize partnerAnswersDictionary = _partnerAnswersDictionary;
 
 
 - (void)viewDidLoad
@@ -34,37 +29,13 @@
     self.pullToRefreshEnabled = YES;
     self.paginationEnabled = YES;
     self.objectsPerPage = 5;
-
-//    self.globalVariables = [[UIApplication sharedApplication] delegate];
-
+    
     [super viewDidLoad];
     
-	// Do any additional setup after loading the view.
-}
-
-- (void)createQuestionsAnswersDictionary:(NSArray *)result error:(NSError *)error
-{
-    self.userAnswersDictionary = [NSMutableDictionary dictionary];
+    self.user = [(Storage *)[Storage sharedInstance] user];
     
-    for (PFObject *answer in result) {
-        for (PFObject *question in self.objects) {
-            BOOL match = [(NSString *)[answer objectForKey:@"questionId"] compare:[question objectId]] == NSOrderedSame;
-            if (match) {
-                [self.userAnswersDictionary setObject:answer forKey:question.objectId];
-            }
-        }
-    }
-    [self.tableView reloadData];
-    
-}
-
-- (void)getUserAnswers{
-    
-    //TODO: add filter on userId
-    PFQuery *query = [PFQuery queryWithClassName:@"UserAnswer"];
-    [query whereKey:@"categoryId" equalTo:self.categoryId];
-    [query findObjectsInBackgroundWithTarget:self selector:@selector(createQuestionsAnswersDictionary:error:)];
-    
+    NSString *notificationName = @"USER_ANSWERS_NOTIFICATION";
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userAnswersNotification:) name:notificationName object:nil];
 }
 
 - (PFQuery *)queryForTable {
@@ -80,19 +51,11 @@
     return query;
 }
 
-- (void)objectsDidLoad:(NSError *)error
-{
-    [super objectsDidLoad:error];
-    
-    if (error) {
-        NSLog(@"ERROR LAODING OBJECTS");
-        return;
-    }
-    
-    [self getUserAnswers];
-    
-}
 
+- (void)userAnswersNotification:(NSNotification *)notification
+{
+    [self.tableView reloadData];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -111,14 +74,18 @@
     
     QuestionCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
+    if (cell == nil) {
+        cell = [[QuestionCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    
     cell.questionLabel.text = [object objectForKey:@"question"];
     
-    PFObject *answer = [self.userAnswersDictionary objectForKey:object.objectId];
-    
+    PFObject *answer = [self.user.questionAnswerMap objectForKey:object.objectId];
     
     if (answer) {
-        [cell.questionLabel setHidden:YES];
-    }
+        [cell.userCheckmark setHidden:NO];
+    } 
+    
     
     return cell;
 }
@@ -140,8 +107,6 @@
         if ([segue.destinationViewController isKindOfClass:[QuestionDetailViewController class]]) {
             QuestionDetailViewController *destination = segue.destinationViewController;
             destination.question = self.currentQuestion;
-            destination.userAnswer = [self.userAnswersDictionary valueForKey:self.currentQuestion.objectId];
-            destination.partnerAnswer = [self.partnerAnswersDictionary valueForKey:self.currentQuestion.objectId];
         }
     }
 }
@@ -149,7 +114,6 @@
 //reload table when user navigates back from the single question view
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    [self getPartnerAnswers];
     [self.tableView reloadData];
 }
 

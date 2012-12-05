@@ -143,16 +143,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="QuestionCell" rowHeight="100" id="Zrs-IS-wTL" customClass="QuestionCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="QuestionCell" rowHeight="100" id="Zrs-IS-wTL" customClass="QuestionCell">
                                 <rect key="frame" x="0.0" y="22" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="99"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="211" translatesAutoresizingMaskIntoConstraints="NO" id="PRy-Px-NdN">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="222" translatesAutoresizingMaskIntoConstraints="NO" id="PRy-Px-NdN">
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="211" id="j21-IV-Rbn"/>
+                                                <constraint firstAttribute="width" constant="222" id="STL-ME-5A1"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -161,7 +161,7 @@
                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qof-NT-JZ9">
                                             <color key="backgroundColor" red="0.50588238240000005" green="0.91372555489999996" blue="0.57647061349999995" alpha="1" colorSpace="deviceRGB"/>
                                         </view>
-                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="chJ-8j-FXd">
+                                        <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="chJ-8j-FXd">
                                             <color key="backgroundColor" red="0.37647062539999998" green="0.59607845540000004" blue="0.88627457620000005" alpha="1" colorSpace="deviceRGB"/>
                                         </view>
                                     </subviews>
@@ -169,16 +169,16 @@
                                 </view>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="chJ-8j-FXd" secondAttribute="bottom" constant="21" id="5pE-k8-Owb"/>
+                                    <constraint firstItem="qof-NT-JZ9" firstAttribute="leading" secondItem="PRy-Px-NdN" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="6C5-n0-nyn"/>
+                                    <constraint firstItem="chJ-8j-FXd" firstAttribute="leading" secondItem="PRy-Px-NdN" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="81w-Kt-Kpy"/>
                                     <constraint firstAttribute="bottom" secondItem="qof-NT-JZ9" secondAttribute="bottom" constant="50" id="9cP-pX-zKy"/>
                                     <constraint firstItem="PRy-Px-NdN" firstAttribute="top" secondItem="Zrs-IS-wTL" secondAttribute="top" constant="20" type="default" id="DNn-fH-6SM"/>
-                                    <constraint firstItem="chJ-8j-FXd" firstAttribute="leading" secondItem="PRy-Px-NdN" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Q22-3z-C6A"/>
                                     <constraint firstItem="chJ-8j-FXd" firstAttribute="top" secondItem="Zrs-IS-wTL" secondAttribute="top" constant="49" id="U0c-uA-A3f"/>
-                                    <constraint firstItem="qof-NT-JZ9" firstAttribute="leading" secondItem="PRy-Px-NdN" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="eTq-gu-vPk"/>
+                                    <constraint firstItem="chJ-8j-FXd" firstAttribute="trailing" secondItem="qof-NT-JZ9" secondAttribute="trailing" type="default" id="cjb-ff-qe8"/>
                                     <constraint firstItem="qof-NT-JZ9" firstAttribute="top" secondItem="Zrs-IS-wTL" secondAttribute="top" constant="20" type="default" id="ikF-AI-zuV"/>
-                                    <constraint firstItem="chJ-8j-FXd" firstAttribute="trailing" secondItem="qof-NT-JZ9" secondAttribute="trailing" type="default" id="lgr-al-Lc0"/>
+                                    <constraint firstAttribute="trailing" secondItem="qof-NT-JZ9" secondAttribute="trailing" constant="40" id="oPv-Lf-UvU"/>
                                     <constraint firstItem="PRy-Px-NdN" firstAttribute="leading" secondItem="Zrs-IS-wTL" secondAttribute="leading" constant="20" type="default" id="olA-YA-uLq"/>
                                     <constraint firstAttribute="bottom" secondItem="PRy-Px-NdN" secondAttribute="bottom" constant="20" type="default" id="yXO-Mb-fRF"/>
-                                    <constraint firstAttribute="trailing" secondItem="qof-NT-JZ9" secondAttribute="trailing" constant="51" id="zNL-es-k3R"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="partnerCheckmark" destination="chJ-8j-FXd" id="ssH-x6-DpY"/>

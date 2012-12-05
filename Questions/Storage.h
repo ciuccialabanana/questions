@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "User.h"
+#import <Parse/Parse.h>
 
 @interface Storage : NSObject
 
 @property (nonatomic, strong) User *user;
 
 + (id)sharedInstance;
+
+- (void)storeUserAnswerWIthAnswerId:(NSString *)answerId withQuestion:(PFObject *)question;
 
 @end
