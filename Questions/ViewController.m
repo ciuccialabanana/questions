@@ -26,9 +26,6 @@
 
 @implementation ViewController
 
-//@synthesize friendPickerController = _friendPickerController;
-//@synthesize invitePartnerButton = _invitePartnerButton;
-
 
 - (void)viewDidLoad
 {

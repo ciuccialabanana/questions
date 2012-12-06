@@ -83,7 +83,7 @@
     PFObject *answer = [self.user.questionAnswerMap objectForKey:object.objectId];
     
     if (answer) {
-        [cell.userCheckmark setHidden:NO];
+        [cell.userCheckMark setHidden:NO];
     } 
     
     

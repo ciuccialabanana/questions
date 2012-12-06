@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
 
-@interface questionCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet FBProfilePictureView *userProfileImage;
-@property (weak, nonatomic) IBOutlet FBProfilePictureView *partnerProfileImage;
-@property (weak, nonatomic) IBOutlet UILabel *questionText;
+@interface QuestionCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet UILabel *questionLabel;
+@property (weak, nonatomic) IBOutlet UIView *userCheckMark;
+@property (weak, nonatomic) IBOutlet UIView *partnerCheckMark;
 
 @end

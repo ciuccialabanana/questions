@@ -11,8 +11,6 @@
 
 @implementation Facebook
 
-@synthesize delegate = _delegate;
-
 
 + (id)sharedInstance
 {

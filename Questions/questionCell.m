@@ -8,26 +8,18 @@
 
 #import "questionCell.h"
 
-@implementation questionCell
-
-@synthesize questionText = _questionText;
-@synthesize userProfileImage = _userProfileImage;
-@synthesize partnerProfileImage = _partnerProfileImage;
+@implementation QuestionCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+      [self.userCheckMark setHidden:YES];
+      [self.partnerCheckMark setHidden:YES];
     }
     return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
-}
 
 @end

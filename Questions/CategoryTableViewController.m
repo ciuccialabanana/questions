@@ -20,8 +20,6 @@
 
 @implementation CategoryTableViewController
 
-//@synthesize currentCategoryId = _currentCategoryId;
-
 - (void)viewDidLoad
 {
     self.className = @"Categories";
