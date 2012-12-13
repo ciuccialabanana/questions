@@ -11,7 +11,6 @@
 		8769F4B8166F1F3E0007EB00 /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8769F4B7166F1F3E0007EB00 /* Storage.m */; };
 		879F14601645E3660001815A /* CategoryQuestionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 879F145F1645E3660001815A /* CategoryQuestionsTableViewController.m */; };
 		87A91196165DDFB7000C6FAF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A91195165DDFB7000C6FAF /* User.m */; };
-		87A9119A165E02AE000C6FAF /* QuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A91199165E02AD000C6FAF /* QuestionCell.m */; };
 		87C89D30163CAF2900A39431 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C89D2F163CAF2900A39431 /* UIKit.framework */; };
 		87C89D32163CAF2900A39431 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C89D31163CAF2900A39431 /* Foundation.framework */; };
 		87C89D34163CAF2900A39431 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C89D33163CAF2900A39431 /* CoreGraphics.framework */; };
@@ -31,6 +30,7 @@
 		87C89D5F163CB90600A39431 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C89D5E163CB90600A39431 /* Facebook.m */; };
 		87C89D6E163CCE7F00A39431 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C89D6D163CCE7F00A39431 /* LoginViewController.m */; };
 		87D44E3E16799970001AB221 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 87D44E3D16799970001AB221 /* Icon-72.png */; };
+		87F2362C1679A06900A5B185 /* QuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F2362B1679A06900A5B185 /* QuestionCell.m */; };
 		B198504B1642473900DE9035 /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B198504A1642473900DE9035 /* CategoryTableViewController.m */; };
 		B19FF0FB163F7A830055A42A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19FF0FA163F7A830055A42A /* Parse.framework */; };
 		B19FF0FE163F7AFA0055A42A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19FF0FD163F7AFA0055A42A /* AudioToolbox.framework */; };
@@ -53,8 +53,6 @@
 		879F145F1645E3660001815A /* CategoryQuestionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryQuestionsTableViewController.m; sourceTree = "<group>"; };
 		87A91194165DDFB7000C6FAF /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		87A91195165DDFB7000C6FAF /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		87A91198165E02AD000C6FAF /* QuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionCell.h; sourceTree = "<group>"; };
-		87A91199165E02AD000C6FAF /* QuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionCell.m; sourceTree = "<group>"; };
 		87C89D2B163CAF2900A39431 /* Questions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Questions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87C89D2F163CAF2900A39431 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		87C89D31163CAF2900A39431 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -81,6 +79,8 @@
 		87C89D6C163CCE7F00A39431 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		87C89D6D163CCE7F00A39431 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		87D44E3D16799970001AB221 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = SOURCE_ROOT; };
+		87F2362A1679A06900A5B185 /* QuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionCell.h; sourceTree = "<group>"; };
+		87F2362B1679A06900A5B185 /* QuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionCell.m; sourceTree = "<group>"; };
 		B19850491642473900DE9035 /* CategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTableViewController.h; sourceTree = "<group>"; };
 		B198504A1642473900DE9035 /* CategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryTableViewController.m; sourceTree = "<group>"; };
 		B19FF0FA163F7A830055A42A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
@@ -205,8 +205,8 @@
 				879F145F1645E3660001815A /* CategoryQuestionsTableViewController.m */,
 				B1AFDFC6164751BF0068A0E0 /* QuestionDetailViewController.h */,
 				B1AFDFC7164751BF0068A0E0 /* QuestionDetailViewController.m */,
-				87A91198165E02AD000C6FAF /* QuestionCell.h */,
-				87A91199165E02AD000C6FAF /* QuestionCell.m */,
+				87F2362A1679A06900A5B185 /* QuestionCell.h */,
+				87F2362B1679A06900A5B185 /* QuestionCell.m */,
 				87C89D36163CAF2900A39431 /* Supporting Files */,
 			);
 			path = Questions;
@@ -306,8 +306,8 @@
 				879F14601645E3660001815A /* CategoryQuestionsTableViewController.m in Sources */,
 				B1AFDFC8164751BF0068A0E0 /* QuestionDetailViewController.m in Sources */,
 				87A91196165DDFB7000C6FAF /* User.m in Sources */,
-				87A9119A165E02AE000C6FAF /* QuestionCell.m in Sources */,
 				8769F4B8166F1F3E0007EB00 /* Storage.m in Sources */,
+				87F2362C1679A06900A5B185 /* QuestionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

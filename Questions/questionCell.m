@@ -1,12 +1,12 @@
 //
-//  questionCell.m
+//  QuestionCell.m
 //  Questions
 //
-//  Created by Alberto Montagnese on 11/11/12.
+//  Created by Giuseppe Macri on 12/12/12.
 //  Copyright (c) 2012 FJ. All rights reserved.
 //
 
-#import "questionCell.h"
+#import "QuestionCell.h"
 
 @implementation QuestionCell
 
@@ -14,12 +14,16 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-      [self.userCheckMark setHidden:YES];
-      [self.partnerCheckMark setHidden:YES];
+
     }
     return self;
 }
 
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
 
+    // Configure the view for the selected state
+}
 
 @end
