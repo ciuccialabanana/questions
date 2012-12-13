@@ -78,8 +78,6 @@
         cell = [[QuestionCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-//    cell.textLabel.text = [object objectForKey:@"question"];
-    
     cell.questionLabel.text = [object objectForKey:@"question"];
     
     PFObject *answer = [self.user.questionAnswerMap objectForKey:object.objectId];
