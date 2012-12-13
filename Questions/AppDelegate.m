@@ -19,6 +19,10 @@
     [Parse setApplicationId:@"fqNqNeGBqtjp3pP6UNjWlIs2wejZoIFTGNbGNlQk"
                   clientKey:@"dpJ1k5cgnaY1thYIc6a5oluNzg0C4b76htAq8GwA"];
     // Override point for customization after application launch.
+    UIImageView * background =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
+    [self.window.rootViewController.view addSubview:background];
+    [self.window.rootViewController.view sendSubviewToBack: background];
+    
     return YES;
 }
 
