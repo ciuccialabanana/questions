@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
+#import "Storage.h"
 
 @implementation AppDelegate
 
@@ -22,6 +23,11 @@
     UIImageView * background =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
     [self.window.rootViewController.view addSubview:background];
     [self.window.rootViewController.view sendSubviewToBack: background];
+    
+    [FBProfilePictureView class];
+    
+    [Storage sharedInstance];
+    
     
     return YES;
 }

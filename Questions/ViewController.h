@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <FacebookSDK/FacebookSDK.h>
 
-@interface ViewController : UIViewController <FBViewControllerDelegate>
-    -(IBAction)invitePartner;
+
+@interface ViewController : UIViewController
 
 @end

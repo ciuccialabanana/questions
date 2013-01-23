@@ -8,10 +8,6 @@
 
 #import "Storage.h"
 
-
-#define USERID @"user_id"
-#define USER_QUESTION_ANSWER_MAP @"question_answer_map"
-
 @implementation Storage
 
 + (id)sharedInstance
@@ -42,6 +38,7 @@
         [defaults setObject:self.user.userId forKey:USERID];
         if ([defaults synchronize]) {
             NSLog(@"saved");
+            // TODO: save user to parse
         } else {
             NSLog(@"error saving");
         }
@@ -54,19 +51,32 @@
     return self;
 }
 
-- (void)storeUserAnswerWIthAnswerId:(NSString *)answerId withQuestion:(PFObject *)question
+
+- (void)storeUserToServer
+{
+    PFObject *userObject = [PFObject objectWithClassName:@"User"];
+    [userObject setObject:self.user.userId forKey:USERID];
+    [userObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            self.userObject = userObject;
+        } else {
+            NSLog(@"Not possible to save the current user");
+        }
+    }];
+}
+
+- (void)storeUserAnswerWithAnswerId:(NSString *)answerId withQuestion:(PFObject *)question
 {
     PFObject *answer = [self.user.questionAnswerMap objectForKey:question.objectId];;
     
     if (!answer) {
         answer = [PFObject objectWithClassName:@"UserAnswer"];
-        
     }
     
     [answer setObject:answerId forKey:@"answerId"];
     [answer setObject:[question valueForKey:@"categoryId"] forKey:@"categoryId"];
     [answer setObject:question.objectId forKey:@"questionId"];
-    [answer setObject:self.user.userId forKey:@"userId"];
+    [answer setObject:self.user.userId forKey:USERID];
     
     [answer saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
@@ -76,6 +86,36 @@
     
     [self.user.questionAnswerMap setObject:answer forKey:question.objectId];
 }
+
+
+- (void)fetchUserInformationWithFacebookId:(NSString *)facebookId
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"User"];
+    [query whereKey:FACEBOOKID equalTo:facebookId];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            
+            if ([objects count] == 0) {
+                self.user.facebookId = facebookId;
+                [self storeUserToServer];
+            } else if ([objects count] == 1){
+                PFObject *userObject = [objects objectAtIndex:0];
+                NSString *userId = [userObject objectForKey:USERID];
+                NSString *facebookId = [userObject objectForKey:FACEBOOKID];
+                [self.user clear];
+                NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:userId, USERID, facebookId, FACEBOOKID, nil];
+                [self.user updateWithDictionary:dictionary];
+                [self fetchUserAnswers];
+                // TODO: fetch user answer information
+            } else {
+                NSLog(@"Too many users with same facebook id. ERROR!");
+            }
+        }
+        
+    }];
+}
+
+
 
 - (void)fetchUserAnswers
 {

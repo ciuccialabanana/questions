@@ -24,7 +24,7 @@
 {
     self = [super init];
     if (self) {
-        self.userId = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        self.userId = [[NSUUID UUID] UUIDString];
         self.questionAnswerMap = [NSMutableDictionary dictionary];
     }
     return self;
@@ -40,5 +40,22 @@
     return self;
 }
 
+- (void)clear
+{
+    self.userId = nil;
+    self.facebookId = nil;
+    [self.questionAnswerMap removeAllObjects];
+}
+
+- (void)updateWithDictionary:(NSDictionary *)dictionary
+{
+    if ([dictionary objectForKey:USERID]) {
+        self.userId = [dictionary objectForKey:USERID];
+    }
+    
+    if ([dictionary objectForKey:FACEBOOKID]) {
+        self.facebookId = [dictionary objectForKey:FACEBOOKID];
+    }
+}
 
 @end

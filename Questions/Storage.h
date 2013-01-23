@@ -13,9 +13,12 @@
 @interface Storage : NSObject
 
 @property (nonatomic, strong) User *user;
+@property (nonatomic, strong) PFObject *userObject;
 
 + (id)sharedInstance;
 
-- (void)storeUserAnswerWIthAnswerId:(NSString *)answerId withQuestion:(PFObject *)question;
+- (void)storeUserAnswerWithAnswerId:(NSString *)answerId withQuestion:(PFObject *)question;
+
+- (void)fetchUserInformationWithFacebookId:(NSString *)facebookId;
 
 @end

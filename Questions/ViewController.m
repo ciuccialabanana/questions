@@ -7,19 +7,15 @@
 //
 
 #import "ViewController.h"
-#import "AppDelegate.h"
-
+#import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
 
-@interface ViewController ()
+@interface ViewController () <FBLoginViewDelegate>
 
-//@property (nonatomic, strong) AppDelegate *globalVariables;
-@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
-@property (strong, nonatomic) IBOutlet FBProfilePictureView *userProfileImage;
+@property (weak, nonatomic) IBOutlet FBProfilePictureView *profilePicture;
 @property (weak, nonatomic) IBOutlet UIButton *invitePartnerButton;
-
-@property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
+@property (weak, nonatomic) IBOutlet UIButton *questionsButton;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @end
 
@@ -30,23 +26,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor clearColor];
+    self.nameLabel.text = nil;
+    // Create Login View so that the app will be granted "status_update" permission.
+    FBLoginView *loginview = [[FBLoginView alloc] init];
     
-    //self.globalVariables = [[UIApplication sharedApplication] delegate];
-
-    [self.loadingIndicator setHidesWhenStopped:YES];
+    loginview.frame = CGRectOffset(loginview.frame, 5, 5);
+    loginview.delegate = self;
     
-    //hide send invitation
-    self.invitePartnerButton.hidden = YES;
+    [self.view addSubview:loginview];
     
-
-    if (FBSession.activeSession.isOpen) {
-        [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
-            self.userNameLabel.text = user.first_name;
-            self.userProfileImage.profileID = user.id;
-            [self.loadingIndicator stopAnimating];
-        }];
-    }
+    [loginview sizeToFit];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,25 +44,27 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - FBLoginViewDelegate
 
-- (FBFriendPickerViewController *)friendPickerController
-{
-    if (!_friendPickerController) {
-        // Create friend picker, and get data loaded into it.
-        self.friendPickerController = [[FBFriendPickerViewController alloc] init];
-        self.friendPickerController.title = @"Select Friends";
-        self.friendPickerController.delegate = self;
-    }
-    return _friendPickerController;
+- (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
+    self.invitePartnerButton.enabled = YES;
+}
+
+- (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
+                            user:(id<FBGraphUser>)user {
+
+    self.nameLabel.text = [NSString stringWithFormat:@"Hello %@!", user.first_name];    
+    self.profilePicture.profileID = user.id;
+}
+
+- (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
+    self.invitePartnerButton.enabled = NO;
+    self.profilePicture.profileID = nil;
+    self.nameLabel.text = nil;
 }
 
 
--(IBAction)invitePartner {
-    [self.friendPickerController loadData];
-    [self.friendPickerController clearSelection];
-    self.friendPickerController.allowsMultipleSelection = NO;
-    [self presentViewController:self.friendPickerController animated:YES completion:^{}];
-}
+# pragma mark - Facebook friend list delegates
 
 - (void)facebookViewControllerCancelWasPressed:(id)sender
 {

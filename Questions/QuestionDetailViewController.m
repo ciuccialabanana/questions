@@ -96,7 +96,7 @@
 
     self.answerId = selectedAnswer.objectId;
     
-    [[Storage sharedInstance] storeUserAnswerWIthAnswerId:self.answerId withQuestion:self.question];
+    [[Storage sharedInstance] storeUserAnswerWithAnswerId:self.answerId withQuestion:self.question];
     
     [[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryCheckmark];
     
