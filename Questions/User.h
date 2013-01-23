@@ -8,9 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-#define USERID @"user_id"
+
+// Class names
+#define USER @"user"
+#define USERANSWER @"UserAnswer"
+
+// Filed names
+#define USERID @"userId"
 #define USER_QUESTION_ANSWER_MAP @"question_answer_map"
-#define FACEBOOKID @"facebook_id"
+#define FACEBOOKID @"facebookId"
+#define ANSWERID @"answerId"
+#define CATEGORYID @"categoryId"
+#define QUESTIONID @"questionId"
 
 @interface User : NSObject
 

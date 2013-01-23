@@ -21,4 +21,6 @@
 
 - (void)fetchUserInformationWithFacebookId:(NSString *)facebookId;
 
+- (void)clearCurrentUser;
+
 @end

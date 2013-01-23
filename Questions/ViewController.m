@@ -9,8 +9,12 @@
 #import "ViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
+#import "Storage.h"
 
 @interface ViewController () <FBLoginViewDelegate>
+
+
+@property (weak, nonatomic) Storage *storage;
 
 @property (weak, nonatomic) IBOutlet FBProfilePictureView *profilePicture;
 @property (weak, nonatomic) IBOutlet UIButton *invitePartnerButton;
@@ -37,6 +41,9 @@
     
     [loginview sizeToFit];
     
+    
+    self.storage = [Storage sharedInstance];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,12 +62,14 @@
 
     self.nameLabel.text = [NSString stringWithFormat:@"Hello %@!", user.first_name];    
     self.profilePicture.profileID = user.id;
+    [self.storage fetchUserInformationWithFacebookId:user.id];
 }
 
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
     self.invitePartnerButton.enabled = NO;
     self.profilePicture.profileID = nil;
     self.nameLabel.text = nil;
+    [self.storage clearCurrentUser];
 }
 
 

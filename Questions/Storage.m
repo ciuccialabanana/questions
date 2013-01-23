@@ -31,9 +31,12 @@
         if (!userId) {
             // create a new user
             self.user = [User user];
+            [self storeUserToServer];
         } else {
-            // fetch user info
             self.user = [User userWithUserId:userId];
+            // fetch user info from parse
+            [self fetchUserAnswers];
+            
         }
         [defaults setObject:self.user.userId forKey:USERID];
         if ([defaults synchronize]) {
@@ -44,9 +47,6 @@
         }
         
         
-        // fetch user answers
-        [self fetchUserAnswers];
-        
     }
     return self;
 }
@@ -54,8 +54,11 @@
 
 - (void)storeUserToServer
 {
-    PFObject *userObject = [PFObject objectWithClassName:@"User"];
+    PFObject *userObject = [PFObject objectWithClassName:USER];
     [userObject setObject:self.user.userId forKey:USERID];
+    if (self.user.facebookId) {
+        [userObject setObject:self.user.facebookId forKey:FACEBOOKID];
+    }
     [userObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             self.userObject = userObject;
@@ -70,12 +73,14 @@
     PFObject *answer = [self.user.questionAnswerMap objectForKey:question.objectId];;
     
     if (!answer) {
-        answer = [PFObject objectWithClassName:@"UserAnswer"];
+        answer = [PFObject objectWithClassName:USERANSWER];
     }
     
-    [answer setObject:answerId forKey:@"answerId"];
-    [answer setObject:[question valueForKey:@"categoryId"] forKey:@"categoryId"];
-    [answer setObject:question.objectId forKey:@"questionId"];
+    NSString *categoryId = [question valueForKey:CATEGORYID];
+    
+    [answer setObject:answerId forKey:ANSWERID];
+    [answer setObject:categoryId forKey:CATEGORYID];
+    [answer setObject:question.objectId forKey:QUESTIONID];
     [answer setObject:self.user.userId forKey:USERID];
     
     [answer saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -90,11 +95,10 @@
 
 - (void)fetchUserInformationWithFacebookId:(NSString *)facebookId
 {
-    PFQuery *query = [PFQuery queryWithClassName:@"User"];
+    PFQuery *query = [PFQuery queryWithClassName:USER];
     [query whereKey:FACEBOOKID equalTo:facebookId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            
             if ([objects count] == 0) {
                 self.user.facebookId = facebookId;
                 [self storeUserToServer];
@@ -106,7 +110,6 @@
                 NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:userId, USERID, facebookId, FACEBOOKID, nil];
                 [self.user updateWithDictionary:dictionary];
                 [self fetchUserAnswers];
-                // TODO: fetch user answer information
             } else {
                 NSLog(@"Too many users with same facebook id. ERROR!");
             }
@@ -115,17 +118,15 @@
     }];
 }
 
-
-
 - (void)fetchUserAnswers
 {
-    PFQuery *query = [PFQuery queryWithClassName:@"UserAnswer"];
+    PFQuery *query = [PFQuery queryWithClassName:USERANSWER];
     [query whereKey:@"userId" equalTo:self.user.userId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             [self.user.questionAnswerMap removeAllObjects];
             for (PFObject *answer in objects) {
-                [self.user.questionAnswerMap setObject:answer forKey:[answer objectForKey:@"questionId"]];
+                [self.user.questionAnswerMap setObject:answer forKey:[answer objectForKey:QUESTIONID]];
             }
             NSString *notificationName = @"USER_ANSWERS_NOTIFICATION";
             [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:self userInfo:nil];
@@ -134,6 +135,10 @@
     }];
 }
 
+- (void)clearCurrentUser
+{
+    [self.user clear];
+}
 
 
 @end
