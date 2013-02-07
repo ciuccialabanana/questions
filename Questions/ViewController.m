@@ -31,7 +31,7 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor clearColor];
-    
+
     //self.globalVariables = [[UIApplication sharedApplication] delegate];
 
     [self.loadingIndicator setHidesWhenStopped:YES];

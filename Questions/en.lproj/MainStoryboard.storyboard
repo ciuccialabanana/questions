@@ -8,31 +8,63 @@
         <scene sceneID="Byk-R8-vce">
             <objects>
                 <tableViewController storyboardIdentifier="Categories" title="Categories" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wua-M6-3sg" customClass="CategoryTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="lRe-b0-m4G">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="140" sectionHeaderHeight="22" sectionFooterHeight="22" id="lRe-b0-m4G">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="categoryTableCell" textLabel="VPR-B7-L0w" detailTextLabel="rk8-fi-euL" style="IBUITableViewCellStyleSubtitle" id="ugP-lY-qP6">
-                                <rect key="frame" x="0.0" y="46" width="320" height="46"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="categoryTableCell" rowHeight="140" id="ugP-lY-qP6" customClass="CategoryCell">
+                                <rect key="frame" x="0.0" y="22" width="320" height="140"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="10" y="1" width="280" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="139"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VPR-B7-L0w">
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="cell_background_top.png" translatesAutoresizingMaskIntoConstraints="NO" id="S3g-yK-XLU"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="cell_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="JqN-MN-yHL">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="129" id="xrs-jA-7RB"/>
+                                            </constraints>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="cell_background_bottom.png" translatesAutoresizingMaskIntoConstraints="NO" id="zi9-4L-sDe"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Secondary Line" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yWv-u4-FbY">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="148" id="8x4-q2-zRL"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rk8-fi-euL">
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Category Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0VD-GO-Moj">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="222" id="9QK-2Q-eOc"/>
+                                                <constraint firstAttribute="height" constant="44" id="Nl3-W4-iZa"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="24"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <constraints>
+                                    <constraint firstItem="S3g-yK-XLU" firstAttribute="top" secondItem="ugP-lY-qP6" secondAttribute="top" type="default" id="1zA-cc-1QC"/>
+                                    <constraint firstItem="zi9-4L-sDe" firstAttribute="leading" secondItem="ugP-lY-qP6" secondAttribute="leading" type="default" id="3N3-EB-sDd"/>
+                                    <constraint firstItem="0VD-GO-Moj" firstAttribute="top" secondItem="ugP-lY-qP6" secondAttribute="top" constant="27" id="7Nh-4t-n1c"/>
+                                    <constraint firstItem="S3g-yK-XLU" firstAttribute="leading" secondItem="ugP-lY-qP6" secondAttribute="leading" type="default" id="Mzf-yf-nHA"/>
+                                    <constraint firstItem="JqN-MN-yHL" firstAttribute="top" secondItem="ugP-lY-qP6" secondAttribute="top" constant="5" id="VW1-nX-Iys"/>
+                                    <constraint firstItem="yWv-u4-FbY" firstAttribute="leading" secondItem="ugP-lY-qP6" secondAttribute="leading" constant="20" type="default" id="ZCA-Vb-t3r"/>
+                                    <constraint firstItem="JqN-MN-yHL" firstAttribute="leading" secondItem="ugP-lY-qP6" secondAttribute="leading" type="default" id="baC-rT-lB2"/>
+                                    <constraint firstAttribute="bottom" secondItem="yWv-u4-FbY" secondAttribute="bottom" constant="22" id="gfA-0K-HJR"/>
+                                    <constraint firstItem="0VD-GO-Moj" firstAttribute="leading" secondItem="ugP-lY-qP6" secondAttribute="leading" constant="20" type="default" id="hKK-Oz-9l0"/>
+                                    <constraint firstItem="zi9-4L-sDe" firstAttribute="bottom" secondItem="ugP-lY-qP6" secondAttribute="bottom" type="default" id="kdN-lX-qm7"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="cellBackgroundImage" destination="JqN-MN-yHL" id="LLr-FN-t6i"/>
+                                    <outlet property="cellCategoryLabel" destination="0VD-GO-Moj" id="y58-nC-2fT"/>
+                                    <outlet property="cellHeaderImage" destination="S3g-yK-XLU" id="bkr-2T-EPp"/>
+                                    <outlet property="cellSecondaryLabel" destination="yWv-u4-FbY" id="FAM-K7-rf5"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -40,7 +72,7 @@
                             <outlet property="delegate" destination="wua-M6-3sg" id="gZZ-bY-GZf"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="RJT-Wy-OvF"/>
+                    <navigationItem key="navigationItem" title="CoupleQuiz" id="RJT-Wy-OvF"/>
                     <connections>
                         <segue destination="fMU-en-nVO" kind="push" identifier="goToCategoryQuestions" id="lcd-rj-2lD"/>
                     </connections>
@@ -49,10 +81,10 @@
             </objects>
             <point key="canvasLocation" x="602" y="-633"/>
         </scene>
-        <!--View Controller-->
+        <!--Load View Controller-->
         <scene sceneID="28s-ru-STi">
             <objects>
-                <viewController id="4gJ-xz-SBh" sceneMemberID="viewController">
+                <viewController id="4gJ-xz-SBh" customClass="LoadViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4s5-Sk-gpZ">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -87,6 +119,7 @@
                                             <attributes>
                                                 <color key="NSColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <font key="NSFont" size="15" name="Helvetica-Bold"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>
@@ -397,9 +430,21 @@
     </scenes>
     <resources>
         <image name="background.png" width="322" height="482"/>
+        <image name="cell_background.png" width="320" height="120"/>
+        <image name="cell_background_bottom.png" width="320" height="55"/>
+        <image name="cell_background_top.png" width="320" height="10"/>
         <image name="heart_logo.png" width="25" height="22"/>
     </resources>
     <classes>
+        <class className="CategoryCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategoryCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="cellBackgroundImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="cellCategoryLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="cellHeaderImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="cellSecondaryLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
         <class className="CategoryQuestionsTableViewController" superclassName="PFQueryTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CategoryQuestionsTableViewController.h"/>
         </class>
@@ -408,6 +453,9 @@
         </class>
         <class className="FBProfilePictureView" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FBProfilePictureView.h"/>
+        </class>
+        <class className="LoadViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoadViewController.h"/>
         </class>
         <class className="LoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
