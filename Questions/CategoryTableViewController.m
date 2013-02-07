@@ -8,7 +8,7 @@
 
 #import "CategoryTableViewController.h"
 #import "CategoryQuestionsTableViewController.h"
-
+#import "CategoryCell.h"
 
 
 @interface CategoryTableViewController ()
@@ -27,9 +27,15 @@
     self.paginationEnabled = NO;
     self.objectsPerPage = 5;
     
-    
     [super viewDidLoad];
 
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    
 }
 
 - (PFQuery *)queryForTable {
@@ -64,15 +70,19 @@
                         object:(PFObject *)object {
     static NSString *CellIdentifier = @"categoryTableCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    CategoryCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                       reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell to show todo item with a priority at the bottom
-    cell.textLabel.text = [object objectForKey:@"name"];
-    cell.detailTextLabel.text = @"1 - 50";
+      cell.cellCategoryLabel.text = [object objectForKey:@"name"];
+    cell.cellSecondaryLabel.text = @"1 - 50";
+      //cell.cellBackgroundImage.image = UIImage.;
+      //cell.cellHeaderImage.image = "";
+//    cell. = 
+  //  cell.detailTextLabel.text = @"1 - 50";
     
     return cell;
 }
