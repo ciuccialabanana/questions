@@ -9,11 +9,14 @@
 #import "CategoryTableViewController.h"
 #import "CategoryQuestionsTableViewController.h"
 #import "CategoryCell.h"
+#import "Storage.h"
 
 
 @interface CategoryTableViewController ()
 
 @property (nonatomic, strong) NSString *currentCategoryId;
+
+@property (nonatomic, weak) Storage *storage;
 
 @end
 
@@ -26,6 +29,9 @@
     self.pullToRefreshEnabled = YES;
     self.paginationEnabled = NO;
     self.objectsPerPage = 5;
+    
+    
+    self.storage = [Storage sharedInstance];
     
     [super viewDidLoad];
 
@@ -79,6 +85,8 @@
     // Configure the cell to show todo item with a priority at the bottom
       cell.cellCategoryLabel.text = [object objectForKey:@"name"];
     cell.cellSecondaryLabel.text = @"1 - 50";
+//    self.storage.user.questionAnswerMap
+    
       //cell.cellBackgroundImage.image = UIImage.;
       //cell.cellHeaderImage.image = "";
 //    cell. = 
