@@ -7,6 +7,7 @@
 //
 
 #import "Storage.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @implementation Storage
 
@@ -31,12 +32,11 @@
         if (!userId) {
             // create a new user
             self.user = [User user];
-            [self storeUserToServer];
+            [self storeInfoToServerForUser:self.user];
         } else {
             self.user = [User userWithUserId:userId];
             // fetch user info from parse
-            [self fetchUserAnswers];
-            
+            [self fetchUserAnswersForUser:self.user];
         }
         [defaults setObject:self.user.userId forKey:USERID];
         if ([defaults synchronize]) {
@@ -52,12 +52,12 @@
 }
 
 
-- (void)storeUserToServer
+- (void)storeInfoToServerForUser:(User *)user
 {
     PFObject *userObject = [PFObject objectWithClassName:USER];
-    [userObject setObject:self.user.userId forKey:USERID];
-    if (self.user.facebookId) {
-        [userObject setObject:self.user.facebookId forKey:FACEBOOKID];
+    [userObject setObject:user.userId forKey:USERID];
+    if (user.facebookId) {
+        [userObject setObject:user.facebookId forKey:FACEBOOKID];
     }
     [userObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
@@ -70,7 +70,7 @@
 
 - (void)storeUserAnswerWithAnswerId:(NSString *)answerId withQuestion:(PFObject *)question
 {
-    PFObject *answer = [self.user.questionAnswerMap objectForKey:question.objectId];;
+    PFObject *answer = [self.user.questionAnswerMap objectForKey:question.objectId];
     
     if (!answer) {
         answer = [PFObject objectWithClassName:USERANSWER];
@@ -92,24 +92,27 @@
     [self.user.questionAnswerMap setObject:answer forKey:question.objectId];
 }
 
+// TODO: REFACTOR THIS TO RETURN USER OBJECT
 
-- (void)fetchUserInformationWithFacebookId:(NSString *)facebookId
+- (void)fetchUserInformationWithFacebookId:(NSString *)facebookId forUser:(User *)user
 {
     PFQuery *query = [PFQuery queryWithClassName:USER];
     [query whereKey:FACEBOOKID equalTo:facebookId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             if ([objects count] == 0) {
-                self.user.facebookId = facebookId;
-                [self storeUserToServer];
+                user.facebookId = facebookId;
+                [self storeInfoToServerForUser:user];
             } else if ([objects count] == 1){
                 PFObject *userObject = [objects objectAtIndex:0];
                 NSString *userId = [userObject objectForKey:USERID];
                 NSString *facebookId = [userObject objectForKey:FACEBOOKID];
-                [self.user clear];
+                [user clear];
                 NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:userId, USERID, facebookId, FACEBOOKID, nil];
-                [self.user updateWithDictionary:dictionary];
-                [self fetchUserAnswers];
+                [user updateWithDictionary:dictionary];
+                
+                // refactor this to store the current user information // main or partner
+                [self fetchUserAnswersForUser:self.user];
             } else {
                 NSLog(@"Too many users with same facebook id. ERROR!");
             }
@@ -118,20 +121,56 @@
     }];
 }
 
-- (void)fetchUserAnswers
+
+- (void)fetchPartnerInformation
+{
+    PFQuery *query = [PFQuery queryWithClassName:COUPLE];
+    [query whereKey:RECEIVER equalTo:self.user.facebookId];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            if ([objects count] > 1) {
+                NSLog(@"Too many couples for the following users. ERROR!");
+            } else if ([objects count] == 1) {
+                // TODO: FETCH PARTNER INFORMATION using facebook sdk
+                PFObject *coupleObject = [objects lastObject];
+                [FBRequestConnection startWithGraphPath:[coupleObject objectForKey:SENDER] completionHandler:^(FBRequestConnection *connection, id<FBGraphUser> result, NSError *error) {
+                    
+                }];
+                // TODO: FETCH PARTNER ANSWERS using parse sdk
+            }
+        }
+    }];
+}
+
+- (void)fetchUserAnswersForUser:(User *)user
 {
     PFQuery *query = [PFQuery queryWithClassName:USERANSWER];
     [query whereKey:@"userId" equalTo:self.user.userId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            [self.user.questionAnswerMap removeAllObjects];
+            [user.questionAnswerMap removeAllObjects];
             for (PFObject *answer in objects) {
-                [self.user.questionAnswerMap setObject:answer forKey:[answer objectForKey:QUESTIONID]];
+                [user.questionAnswerMap setObject:answer forKey:[answer objectForKey:QUESTIONID]];
             }
             NSString *notificationName = @"USER_ANSWERS_NOTIFICATION";
             [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:self userInfo:nil];
         }
         
+    }];
+}
+
+- (void)createCoupleToConfirmWithPartnerFacebookId:(NSString *)facebookId
+{
+    PFObject *coupleObject = [PFObject objectWithClassName:COUPLE];
+    [coupleObject setObject:self.user.facebookId forKey:SENDER];
+    [coupleObject setObject:facebookId forKey:RECEIVER];
+    [coupleObject setObject:[NSNumber numberWithBool:NO] forKey:VALID];
+    [coupleObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"Couple was created");
+        } else {
+            // TODO: CHECK THE ERROR
+        }
     }];
 }
 

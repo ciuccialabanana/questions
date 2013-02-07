@@ -11,15 +11,18 @@
 #import <Parse/Parse.h>
 #import "Storage.h"
 
-@interface ViewController () <FBLoginViewDelegate>
+@interface ViewController () <FBLoginViewDelegate, FBFriendPickerDelegate>
 
 
-@property (weak, nonatomic) Storage *storage;
+@property (nonatomic, weak) Storage *storage;
 
-@property (weak, nonatomic) IBOutlet FBProfilePictureView *profilePicture;
-@property (weak, nonatomic) IBOutlet UIButton *invitePartnerButton;
-@property (weak, nonatomic) IBOutlet UIButton *questionsButton;
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet FBProfilePictureView *profilePicture;
+@property (nonatomic, weak) IBOutlet UIButton *invitePartnerButton;
+@property (nonatomic, weak) IBOutlet UIButton *questionsButton;
+@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+
+
+@property (nonatomic, strong) FBFriendPickerViewController *friendPickerController;
 
 @end
 
@@ -51,6 +54,20 @@
     [super didReceiveMemoryWarning];
 }
 
+
+- (IBAction)onInvitePartnerClick:(id)sender {
+    self.friendPickerController = [[FBFriendPickerViewController alloc] init];
+    self.friendPickerController .title = @"Pick your Partner";
+    self.friendPickerController .delegate = self;
+    self.friendPickerController .allowsMultipleSelection = NO;
+    
+    [self.friendPickerController  loadData];
+    
+    [self presentViewController:self.friendPickerController  animated:YES completion:^{}];
+}
+
+
+
 #pragma mark - FBLoginViewDelegate
 
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
@@ -62,7 +79,7 @@
 
     self.nameLabel.text = [NSString stringWithFormat:@"Hello %@!", user.first_name];    
     self.profilePicture.profileID = user.id;
-    [self.storage fetchUserInformationWithFacebookId:user.id];
+    [self.storage fetchUserInformationWithFacebookId:user.id forUser:self.storage.user];
 }
 
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
@@ -71,7 +88,6 @@
     self.nameLabel.text = nil;
     [self.storage clearCurrentUser];
 }
-
 
 # pragma mark - Facebook friend list delegates
 
@@ -83,8 +99,21 @@
 
 - (void)facebookViewControllerDoneWasPressed:(id)sender
 {
+    NSArray *selection = [self.friendPickerController selection];
+    
+    if ([selection count] > 1) {
+        NSLog(@"Error on friend's selection");
+    }
+    
+    if ([selection count] == 1) {
+        id<FBGraphUser> partner = [selection lastObject];
+        [self.storage createCoupleToConfirmWithPartnerFacebookId:partner.id];
+    }
+    
+    
     [self dismissViewControllerAnimated:YES completion:^{}];
 }
+
 
 
 @end
