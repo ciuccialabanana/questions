@@ -38,6 +38,9 @@
             // fetch user info from parse
             [self fetchUserAnswersForUser:self.user];
         }
+        
+        [self initCategoryQuestionsTotalCounts];
+        
         [defaults setObject:self.user.userId forKey:USERID];
         if ([defaults synchronize]) {
             NSLog(@"saved");
@@ -51,6 +54,30 @@
     return self;
 }
 
+- (void)initCategoryQuestionsTotalCounts{
+    self.questionsPerCategoryTotalCount = [NSMutableDictionary dictionary];
+    //TODO: count items for each category
+    PFQuery *allCatQuery = [PFQuery queryWithClassName:@"Categories"];
+    [allCatQuery findObjectsInBackgroundWithBlock:^(NSArray *categories, NSError *error) {
+        if (!error) {
+            for (PFObject *category in categories){
+                PFQuery *query = [PFQuery queryWithClassName:@"Questions"];
+                [query whereKey:CATEGORYID equalTo:category.objectId];
+                [query countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
+                    if (!error) {
+                        [self.questionsPerCategoryTotalCount setObject:[NSNumber numberWithInt:count] forKey:category.objectId];
+                    }else{
+                        NSLog(@"Error while fetching total count of questions for each category");
+                    }
+                }];
+            }
+            
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+    
+}
 
 - (void)storeInfoToServerForUser:(User *)user
 {

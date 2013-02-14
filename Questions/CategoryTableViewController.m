@@ -86,14 +86,14 @@
     cell.cellCategoryLabel.text = [object objectForKey:@"name"];
     
     
-    //answered question count
+    //answered questions count
     NSString *answeredQuestionsCount = @"0";
     if([self.storage.user.userAnsweredQuestionsPerCategory objectForKey:[object objectId]] != nil){
-        answeredQuestionsCount = [[self.storage.user.userAnsweredQuestionsPerCategory objectForKey:[object objectId]] stringValue];
+        answeredQuestionsCount = [[self.storage.user.userAnsweredQuestionsPerCategory objectForKey:object.objectId] stringValue];
     }
-    NSString *totalQuestionsCount = @"50";
+    NSString *totalQuestionsCount = [[self.storage.questionsPerCategoryTotalCount objectForKey:object.objectId] stringValue];
     
-    cell.cellSecondaryLabel.text = [[answeredQuestionsCount stringByAppendingString:@"/"] stringByAppendingString:totalQuestionsCount];
+    cell.cellSecondaryLabel.text = [[answeredQuestionsCount stringByAppendingString:@" / "] stringByAppendingString:totalQuestionsCount];
     
     
 //    self.storage.user.questionAnswerMap
