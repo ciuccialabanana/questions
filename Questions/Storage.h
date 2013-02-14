@@ -13,9 +13,10 @@
 @interface Storage : NSObject
 
 @property (nonatomic, strong) User *user;
-@property (nonatomic, strong) User *partner;
 @property (nonatomic, strong) PFObject *userObject;
 @property (nonatomic, strong) NSMutableDictionary *questionsPerCategoryTotalCount;
+@property (nonatomic, strong) id possiblePartner;
+
 
 + (id)sharedInstance;
 

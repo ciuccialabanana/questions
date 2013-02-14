@@ -36,6 +36,10 @@
 
 @property (nonatomic, strong) NSMutableDictionary *userAnsweredQuestionsPerCategory;
 
+@property (nonatomic, strong) User *partner;
+
+
+
 + (User *)userWithUserId:(NSString *)userId;
 + (User *)user;
 
