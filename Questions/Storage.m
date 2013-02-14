@@ -111,8 +111,10 @@
                 NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:userId, USERID, facebookId, FACEBOOKID, nil];
                 [user updateWithDictionary:dictionary];
                 
-                // refactor this to store the current user information // main or partner
                 [self fetchUserAnswersForUser:self.user];
+                
+                [self fetchPartnerInformation:self.user];
+                
             } else {
                 NSLog(@"Too many users with same facebook id. ERROR!");
             }
@@ -122,21 +124,27 @@
 }
 
 
-- (void)fetchPartnerInformation
+- (void)fetchPartnerInformation:(User *)user
 {
     PFQuery *query = [PFQuery queryWithClassName:COUPLE];
-    [query whereKey:RECEIVER equalTo:self.user.facebookId];
+    [query whereKey:RECEIVER equalTo:user.facebookId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             if ([objects count] > 1) {
                 NSLog(@"Too many couples for the following users. ERROR!");
             } else if ([objects count] == 1) {
-                // TODO: FETCH PARTNER INFORMATION using facebook sdk
                 PFObject *coupleObject = [objects lastObject];
                 [FBRequestConnection startWithGraphPath:[coupleObject objectForKey:SENDER] completionHandler:^(FBRequestConnection *connection, id<FBGraphUser> result, NSError *error) {
                     
+                    self.possiblePartner = result;
+                    
+                    
+//                    user.partner = [[User alloc] init];
+//                    [self fetchUserInformationWithFacebookId:user.facebookId forUser:user.partner];
+                    // FETCH PARTNER INFORMATION
+                    // TODO: FETCH PARTNER ANSWERS using parse sdk
                 }];
-                // TODO: FETCH PARTNER ANSWERS using parse sdk
+
             }
         }
     }];

@@ -34,6 +34,9 @@
 
 @property (nonatomic, strong) NSMutableDictionary *questionAnswerMap;
 
+@property (nonatomic, strong) User *partner;
+
+
 + (User *)userWithUserId:(NSString *)userId;
 + (User *)user;
 

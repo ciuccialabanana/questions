@@ -367,56 +367,6 @@
         <image name="cell_background_bottom.png" width="320" height="55"/>
         <image name="cell_background_top.png" width="320" height="10"/>
     </resources>
-    <classes>
-        <class className="CategoryCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategoryCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="cellBackgroundImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="cellCategoryLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="cellHeaderImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="cellSecondaryLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="CategoryQuestionsTableViewController" superclassName="PFQueryTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategoryQuestionsTableViewController.h"/>
-        </class>
-        <class className="CategoryTableViewController" superclassName="PFQueryTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategoryTableViewController.h"/>
-        </class>
-        <class className="FBProfilePictureView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FBProfilePictureView.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="PFQueryTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PFQueryTableViewController.h"/>
-        </class>
-        <class className="QuestionCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/QuestionCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="partnerCheckmark" candidateClass="UIView"/>
-                <relationship kind="outlet" name="questionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="userCheckmark" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="QuestionDetailViewController" superclassName="PFQueryTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/QuestionDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="questionLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onInvitePartnerClick:"/>
-                <relationship kind="outlet" name="invitePartnerButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="profilePicture" candidateClass="FBProfilePictureView"/>
-                <relationship kind="outlet" name="questionsButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -34,7 +34,6 @@
 		87C89D5A163CB34500A39431 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C89D57163CB34500A39431 /* AdSupport.framework */; };
 		87C89D5B163CB34500A39431 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C89D58163CB34500A39431 /* Social.framework */; };
 		87C89D5F163CB90600A39431 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C89D5E163CB90600A39431 /* Facebook.m */; };
-		87C89D6E163CCE7F00A39431 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C89D6D163CCE7F00A39431 /* LoginViewController.m */; };
 		87D44E3E16799970001AB221 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 87D44E3D16799970001AB221 /* Icon-72.png */; };
 		87F2362C1679A06900A5B185 /* QuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F2362B1679A06900A5B185 /* QuestionCell.m */; };
 		B198504B1642473900DE9035 /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B198504A1642473900DE9035 /* CategoryTableViewController.m */; };
@@ -90,8 +89,6 @@
 		87C89D58163CB34500A39431 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		87C89D5D163CB90600A39431 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		87C89D5E163CB90600A39431 /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
-		87C89D6C163CCE7F00A39431 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		87C89D6D163CCE7F00A39431 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		87D44E3D16799970001AB221 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = SOURCE_ROOT; };
 		87F2362A1679A06900A5B185 /* QuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionCell.h; sourceTree = "<group>"; };
 		87F2362B1679A06900A5B185 /* QuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionCell.m; sourceTree = "<group>"; };
@@ -215,8 +212,6 @@
 				87C89D3F163CAF2900A39431 /* AppDelegate.m */,
 				87C89D4A163CAF2900A39431 /* ViewController.h */,
 				87C89D4B163CAF2900A39431 /* ViewController.m */,
-				87C89D6C163CCE7F00A39431 /* LoginViewController.h */,
-				87C89D6D163CCE7F00A39431 /* LoginViewController.m */,
 				B19850491642473900DE9035 /* CategoryTableViewController.h */,
 				B198504A1642473900DE9035 /* CategoryTableViewController.m */,
 				879F145E1645E3660001815A /* CategoryQuestionsTableViewController.h */,
@@ -327,7 +322,6 @@
 				87C89D40163CAF2900A39431 /* AppDelegate.m in Sources */,
 				87C89D4C163CAF2900A39431 /* ViewController.m in Sources */,
 				87C89D5F163CB90600A39431 /* Facebook.m in Sources */,
-				87C89D6E163CCE7F00A39431 /* LoginViewController.m in Sources */,
 				B198504B1642473900DE9035 /* CategoryTableViewController.m in Sources */,
 				879F14601645E3660001815A /* CategoryQuestionsTableViewController.m in Sources */,
 				B1AFDFC8164751BF0068A0E0 /* QuestionDetailViewController.m in Sources */,
