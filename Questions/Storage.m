@@ -141,16 +141,28 @@
         }
     }];
 }
-
+ 
 - (void)fetchUserAnswersForUser:(User *)user
 {
+    
     PFQuery *query = [PFQuery queryWithClassName:USERANSWER];
     [query whereKey:@"userId" equalTo:self.user.userId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
+            user.userAnsweredQuestionsPerCategory = [NSMutableDictionary dictionary];
+            
             [user.questionAnswerMap removeAllObjects];
             for (PFObject *answer in objects) {
                 [user.questionAnswerMap setObject:answer forKey:[answer objectForKey:QUESTIONID]];
+                
+                NSNumber *answeredQuestionsCount = [user.userAnsweredQuestionsPerCategory objectForKey:[answer objectForKey:CATEGORYID]];
+                int answeredQuestionsCountInt = 1;
+                if (answeredQuestionsCount != nil){
+                    answeredQuestionsCountInt = [answeredQuestionsCount intValue] + 1;
+                }
+                answeredQuestionsCount = [NSNumber numberWithInt:answeredQuestionsCountInt];
+                
+                [user.userAnsweredQuestionsPerCategory setObject:answeredQuestionsCount forKey:[answer objectForKey:CATEGORYID]];
             }
             NSString *notificationName = @"USER_ANSWERS_NOTIFICATION";
             [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:self userInfo:nil];

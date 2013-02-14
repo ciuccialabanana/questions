@@ -83,8 +83,19 @@
     }
     
     // Configure the cell to show todo item with a priority at the bottom
-      cell.cellCategoryLabel.text = [object objectForKey:@"name"];
-    cell.cellSecondaryLabel.text = @"1 - 50";
+    cell.cellCategoryLabel.text = [object objectForKey:@"name"];
+    
+    
+    //answered question count
+    NSString *answeredQuestionsCount = @"0";
+    if([self.storage.user.userAnsweredQuestionsPerCategory objectForKey:[object objectId]] != nil){
+        answeredQuestionsCount = [[self.storage.user.userAnsweredQuestionsPerCategory objectForKey:[object objectId]] stringValue];
+    }
+    NSString *totalQuestionsCount = @"50";
+    
+    cell.cellSecondaryLabel.text = [[answeredQuestionsCount stringByAppendingString:@"/"] stringByAppendingString:totalQuestionsCount];
+    
+    
 //    self.storage.user.questionAnswerMap
     
       //cell.cellBackgroundImage.image = UIImage.;
