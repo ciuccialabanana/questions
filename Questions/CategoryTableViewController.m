@@ -37,16 +37,11 @@
 
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-        self.view.backgroundColor = [UIColor clearColor];
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
-    
-}
-
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.tableView reloadData];
+    self.view.backgroundColor = [UIColor clearColor];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 
 - (PFQuery *)queryForTable {
