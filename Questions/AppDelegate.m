@@ -25,6 +25,9 @@
 //    [self.window.rootViewController.view addSubview:background];
 //    [self.window.rootViewController.view sendSubviewToBack: background];
     
+    self.window.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    
+    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
     [FBProfilePictureView class];
     
     [Storage sharedInstance];

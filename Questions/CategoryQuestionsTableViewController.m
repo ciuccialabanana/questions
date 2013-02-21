@@ -113,8 +113,10 @@
 
 //reload table when user navigates back from the single question view
 - (void)viewWillAppear:(BOOL)animated {
+    
     [super viewWillAppear:animated];
     [self.tableView reloadData];
+    self.view.backgroundColor = [UIColor clearColor];
 }
 
 
