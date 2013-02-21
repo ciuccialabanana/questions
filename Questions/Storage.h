@@ -24,5 +24,7 @@
 - (void)fetchUserInformationWithFacebookId:(NSString *)facebookId forUser:(User *)user;
 - (void)createCoupleToConfirmWithPartnerFacebookId:(NSString *)facebookId;
 - (void)clearCurrentUser;
+- (void)incrementUserAnsweredQuestionsPerCategory:(NSString *)categoryId;
+
 
 @end

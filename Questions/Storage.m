@@ -101,6 +101,7 @@
     
     if (!answer) {
         answer = [PFObject objectWithClassName:USERANSWER];
+        [self incrementUserAnsweredQuestionsPerCategory:[question objectForKey:CATEGORYID]];
     }
     
     NSString *categoryId = [question valueForKey:CATEGORYID];
@@ -190,14 +191,8 @@
             for (PFObject *answer in objects) {
                 [user.questionAnswerMap setObject:answer forKey:[answer objectForKey:QUESTIONID]];
                 
-                NSNumber *answeredQuestionsCount = [user.userAnsweredQuestionsPerCategory objectForKey:[answer objectForKey:CATEGORYID]];
-                int answeredQuestionsCountInt = 1;
-                if (answeredQuestionsCount != nil){
-                    answeredQuestionsCountInt = [answeredQuestionsCount intValue] + 1;
-                }
-                answeredQuestionsCount = [NSNumber numberWithInt:answeredQuestionsCountInt];
+                [self incrementUserAnsweredQuestionsPerCategory:[answer objectForKey:CATEGORYID]];
                 
-                [user.userAnsweredQuestionsPerCategory setObject:answeredQuestionsCount forKey:[answer objectForKey:CATEGORYID]];
             }
             NSString *notificationName = @"USER_ANSWERS_NOTIFICATION";
             [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:self userInfo:nil];
@@ -205,6 +200,20 @@
         
     }];
 }
+
+- (void)incrementUserAnsweredQuestionsPerCategory:(NSString *)categoryId{
+    
+    if (categoryId) {
+        NSNumber *answeredQuestionsCount = [self.user.userAnsweredQuestionsPerCategory objectForKey:categoryId];
+        int answeredQuestionsCountInt = 1;
+        if (answeredQuestionsCount != nil){
+            answeredQuestionsCountInt = [answeredQuestionsCount intValue] + 1;
+        }
+        answeredQuestionsCount = [NSNumber numberWithInt:answeredQuestionsCountInt];
+        [self.user.userAnsweredQuestionsPerCategory setObject:answeredQuestionsCount forKey:categoryId];
+    }
+}
+
 
 - (void)createCoupleToConfirmWithPartnerFacebookId:(NSString *)facebookId
 {

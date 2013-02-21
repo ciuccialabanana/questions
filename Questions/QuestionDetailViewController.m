@@ -98,7 +98,10 @@
     
     [[Storage sharedInstance] storeUserAnswerWithAnswerId:self.answerId withQuestion:self.question];
     
-    [[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryCheckmark];
+    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    
+    [selectedCell setAccessoryType:UITableViewCellAccessoryCheckmark];
     
     //go back to the list of questions
     [self.navigationController popViewControllerAnimated:YES];
