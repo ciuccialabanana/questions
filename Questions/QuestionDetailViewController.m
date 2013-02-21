@@ -38,7 +38,11 @@
     PFObject *answer = [self.user.questionAnswerMap objectForKey:self.question.objectId];
     self.answerId = [answer objectForKey:@"answerId"];
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.view.backgroundColor = [UIColor clearColor];
+    
+}
 
 - (PFQuery *)queryForTable {
     PFQuery *query = [PFQuery queryWithClassName:self.className];

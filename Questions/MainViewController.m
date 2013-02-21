@@ -1,46 +1,34 @@
 //
-//  LoadViewController.m
+//  MainViewController.m
 //  Questions
 //
-//  Created by Farid Hosseini on 2/6/13.
+//  Created by Farid Hosseini on 2/20/13.
 //  Copyright (c) 2013 FJ. All rights reserved.
 //
 
-#import "LoadViewController.h"
+#import "MainViewController.h"
 
-@interface LoadViewController ()
+@interface MainViewController ()
 
 @end
 
-@implementation LoadViewController
-
+@implementation MainViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-      
+        
     }
     return self;
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
-    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-      
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
     self.view.backgroundColor = [UIColor clearColor];
+	// Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning

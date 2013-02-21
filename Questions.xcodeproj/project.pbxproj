@@ -13,6 +13,11 @@
 		663CE51D16C3565A00A022AF /* cell_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 663CE51A16C3565A00A022AF /* cell_background.png */; };
 		663CE52016C3688B00A022AF /* LoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 663CE51F16C3688B00A022AF /* LoadViewController.m */; };
 		66AD1332167AB85B0020F1BC /* heart_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 66AD1331167AB85B0020F1BC /* heart_logo.png */; };
+		66C3287D16D5F81B0030CD6D /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 66C3287C16D5F81B0030CD6D /* background.png */; };
+		66C3288116D5F8830030CD6D /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C3288016D5F8830030CD6D /* MainViewController.m */; };
+		66C3288316D5FC0E0030CD6D /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 66C3288216D5FC0E0030CD6D /* logo.png */; };
+		66E401B716C41C6A00CE578E /* CategoryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E401B616C41C6A00CE578E /* CategoryCollectionViewController.m */; };
+		66E401BB16C41D0D00CE578E /* CategoryCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E401BA16C41D0D00CE578E /* CategoryCollectionCell.m */; };
 		66EFA8BB1679A84F0005B087 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 66EFA8BA1679A84F0005B087 /* background.png */; };
 		8769F4B8166F1F3E0007EB00 /* Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8769F4B7166F1F3E0007EB00 /* Storage.m */; };
 		879F14601645E3660001815A /* CategoryQuestionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 879F145F1645E3660001815A /* CategoryQuestionsTableViewController.m */; };
@@ -59,6 +64,14 @@
 		663CE51E16C3688B00A022AF /* LoadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadViewController.h; sourceTree = "<group>"; };
 		663CE51F16C3688B00A022AF /* LoadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadViewController.m; sourceTree = "<group>"; };
 		66AD1331167AB85B0020F1BC /* heart_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = heart_logo.png; path = Questions/heart_logo.png; sourceTree = SOURCE_ROOT; };
+		66C3287C16D5F81B0030CD6D /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = Questions/Images/background.png; sourceTree = SOURCE_ROOT; };
+		66C3287F16D5F8830030CD6D /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		66C3288016D5F8830030CD6D /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		66C3288216D5FC0E0030CD6D /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Questions/logo.png; sourceTree = SOURCE_ROOT; };
+		66E401B516C41C6A00CE578E /* CategoryCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryCollectionViewController.h; sourceTree = "<group>"; };
+		66E401B616C41C6A00CE578E /* CategoryCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryCollectionViewController.m; sourceTree = "<group>"; };
+		66E401B916C41D0D00CE578E /* CategoryCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryCollectionCell.h; sourceTree = "<group>"; };
+		66E401BA16C41D0D00CE578E /* CategoryCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryCollectionCell.m; sourceTree = "<group>"; };
 		66EFA8BA1679A84F0005B087 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = Questions/background.png; sourceTree = SOURCE_ROOT; };
 		8769F4B6166F1F3E0007EB00 /* Storage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Storage.h; sourceTree = "<group>"; };
 		8769F4B7166F1F3E0007EB00 /* Storage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Storage.m; sourceTree = "<group>"; };
@@ -151,6 +164,8 @@
 		87A91197165DF6B6000C6FAF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				66C3288216D5FC0E0030CD6D /* logo.png */,
+				66C3287C16D5F81B0030CD6D /* background.png */,
 				663CE51816C3565900A022AF /* cell_background_bottom.png */,
 				663CE51916C3565900A022AF /* cell_background_top.png */,
 				663CE51A16C3565A00A022AF /* cell_background.png */,
@@ -225,6 +240,12 @@
 				663CE51016C353E600A022AF /* CategoryCell.m */,
 				663CE51E16C3688B00A022AF /* LoadViewController.h */,
 				663CE51F16C3688B00A022AF /* LoadViewController.m */,
+				66E401B516C41C6A00CE578E /* CategoryCollectionViewController.h */,
+				66E401B616C41C6A00CE578E /* CategoryCollectionViewController.m */,
+				66E401B916C41D0D00CE578E /* CategoryCollectionCell.h */,
+				66E401BA16C41D0D00CE578E /* CategoryCollectionCell.m */,
+				66C3287F16D5F8830030CD6D /* MainViewController.h */,
+				66C3288016D5F8830030CD6D /* MainViewController.m */,
 			);
 			path = Questions;
 			sourceTree = "<group>";
@@ -308,6 +329,8 @@
 				663CE51B16C3565A00A022AF /* cell_background_bottom.png in Resources */,
 				663CE51C16C3565A00A022AF /* cell_background_top.png in Resources */,
 				663CE51D16C3565A00A022AF /* cell_background.png in Resources */,
+				66C3287D16D5F81B0030CD6D /* background.png in Resources */,
+				66C3288316D5FC0E0030CD6D /* logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +353,9 @@
 				87F2362C1679A06900A5B185 /* QuestionCell.m in Sources */,
 				663CE51116C353E600A022AF /* CategoryCell.m in Sources */,
 				663CE52016C3688B00A022AF /* LoadViewController.m in Sources */,
+				66E401B716C41C6A00CE578E /* CategoryCollectionViewController.m in Sources */,
+				66E401BB16C41D0D00CE578E /* CategoryCollectionCell.m in Sources */,
+				66C3288116D5F8830030CD6D /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

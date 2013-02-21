@@ -37,9 +37,9 @@
 
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    
+        self.view.backgroundColor = [UIColor clearColor];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
 }
