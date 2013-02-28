@@ -61,7 +61,13 @@
                             <outlet property="delegate" destination="wua-M6-3sg" id="gZZ-bY-GZf"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Categories" id="RJT-Wy-OvF"/>
+                    <navigationItem key="navigationItem" title="Categories" id="RJT-Wy-OvF">
+                        <barButtonItem key="rightBarButtonItem" image="man_24.png" id="Y5H-vI-Ajb">
+                            <connections>
+                                <segue destination="4gY-zT-rxZ" kind="modal" id="VJf-5j-S79"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <connections>
                         <segue destination="fMU-en-nVO" kind="push" identifier="goToCategoryQuestions" id="lcd-rj-2lD"/>
@@ -209,7 +215,13 @@
                             <outlet property="delegate" destination="fMU-en-nVO" id="x1S-u0-y3K"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Questions" id="apG-Re-tSO"/>
+                    <navigationItem key="navigationItem" title="Questions" id="apG-Re-tSO">
+                        <barButtonItem key="rightBarButtonItem" image="man_24.png" id="3lG-1g-Al6">
+                            <connections>
+                                <segue destination="4gY-zT-rxZ" kind="modal" id="tGJ-wi-EvF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="P4k-p5-0cE" kind="push" identifier="goToQuestionDetail" id="CIF-2c-iqL"/>
                     </connections>
@@ -261,7 +273,13 @@
                             <outlet property="delegate" destination="P4k-p5-0cE" id="dqQ-q9-GzE"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Question" id="vje-Na-Omk"/>
+                    <navigationItem key="navigationItem" title="Question" id="vje-Na-Omk">
+                        <barButtonItem key="rightBarButtonItem" image="man_24.png" id="cqf-zF-g7H">
+                            <connections>
+                                <segue destination="4gY-zT-rxZ" kind="modal" id="Vdl-bZ-4xv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="questionLabel" destination="9c4-DK-FGD" id="JLr-2L-P2R"/>
                     </connections>
@@ -278,7 +296,7 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5LM-go-cwv" customClass="FBProfilePictureView">
+                            <view contentMode="top" translatesAutoresizingMaskIntoConstraints="NO" id="5LM-go-cwv" customClass="FBProfilePictureView">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Wf-1b-pfh">
@@ -294,19 +312,6 @@
                                     <action selector="onInvitePartnerClick:" destination="cpy-Q6-0cr" eventType="touchUpInside" id="bay-yb-At4"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DoV-MJ-eC9">
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Questions">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="wua-M6-3sg" kind="push" id="3gQ-KR-uYo"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="RLz-vQ-Qc9">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="Y75-bO-0FW"/>
@@ -316,21 +321,32 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r92-fn-9ha">
+                                <items>
+                                    <navigationItem title="Profile" id="Ny7-x0-eO7">
+                                        <barButtonItem key="rightBarButtonItem" title="Done" id="byf-t8-KQD">
+                                            <connections>
+                                                <action selector="done:" destination="cpy-Q6-0cr" id="JV7-zI-juP"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="DoV-MJ-eC9" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="EsH-X8-YDv"/>
-                            <constraint firstAttribute="bottom" secondItem="5LM-go-cwv" secondAttribute="bottom" constant="249" id="Gks-vH-FrP"/>
-                            <constraint firstItem="5LM-go-cwv" firstAttribute="leading" secondItem="U6c-vM-p0h" secondAttribute="leading" constant="61" id="INy-Qq-kYQ"/>
-                            <constraint firstItem="DoV-MJ-eC9" firstAttribute="leading" secondItem="U6c-vM-p0h" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="LmY-3B-Bzg"/>
-                            <constraint firstItem="5LM-go-cwv" firstAttribute="leading" secondItem="RLz-vQ-Qc9" secondAttribute="leading" type="default" id="MqW-VZ-t44"/>
+                            <constraint firstItem="r92-fn-9ha" firstAttribute="top" secondItem="U6c-vM-p0h" secondAttribute="top" type="default" id="DAF-TS-iyn"/>
+                            <constraint firstItem="RLz-vQ-Qc9" firstAttribute="top" secondItem="U6c-vM-p0h" secondAttribute="top" constant="201" id="I9T-Ex-hIM"/>
+                            <constraint firstAttribute="bottom" secondItem="5LM-go-cwv" secondAttribute="bottom" constant="348" id="Jla-zo-YkT"/>
+                            <constraint firstItem="5LM-go-cwv" firstAttribute="top" secondItem="U6c-vM-p0h" secondAttribute="top" constant="80" id="Loh-p7-XTJ"/>
+                            <constraint firstItem="r92-fn-9ha" firstAttribute="leading" secondItem="U6c-vM-p0h" secondAttribute="leading" type="default" id="O2x-hS-eYD"/>
+                            <constraint firstItem="r92-fn-9ha" firstAttribute="trailing" secondItem="U6c-vM-p0h" secondAttribute="trailing" type="default" id="OLo-KX-LEQ"/>
+                            <constraint firstItem="5LM-go-cwv" firstAttribute="centerX" secondItem="r92-fn-9ha" secondAttribute="centerX" type="default" id="Py4-dO-Cc2"/>
+                            <constraint firstItem="RLz-vQ-Qc9" firstAttribute="leading" secondItem="U6c-vM-p0h" secondAttribute="leading" constant="61" id="Qmk-XI-H5o"/>
                             <constraint firstItem="9Wf-1b-pfh" firstAttribute="leading" secondItem="U6c-vM-p0h" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="gXK-nC-Ph2"/>
-                            <constraint firstAttribute="bottom" secondItem="DoV-MJ-eC9" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="ghF-3H-BLy"/>
-                            <constraint firstAttribute="bottom" secondItem="9Wf-1b-pfh" secondAttribute="bottom" constant="87" id="kyy-Tr-ykZ"/>
+                            <constraint firstItem="5LM-go-cwv" firstAttribute="leading" secondItem="U6c-vM-p0h" secondAttribute="leading" constant="100" id="jBI-BN-j8Z"/>
                             <constraint firstAttribute="trailing" secondItem="9Wf-1b-pfh" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="qGw-f1-gLc"/>
-                            <constraint firstItem="RLz-vQ-Qc9" firstAttribute="trailing" secondItem="5LM-go-cwv" secondAttribute="trailing" type="default" id="r94-OH-nAu"/>
-                            <constraint firstAttribute="bottom" secondItem="RLz-vQ-Qc9" secondAttribute="bottom" constant="191" id="uWp-Je-qdy"/>
-                            <constraint firstItem="5LM-go-cwv" firstAttribute="top" secondItem="U6c-vM-p0h" secondAttribute="top" constant="99" id="yl9-Ky-1OI"/>
+                            <constraint firstAttribute="bottom" secondItem="9Wf-1b-pfh" secondAttribute="bottom" constant="69" id="wXE-Ui-3hs"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Questions" id="C5K-xG-TU9"/>
@@ -339,7 +355,6 @@
                         <outlet property="invitePartnerButton" destination="9Wf-1b-pfh" id="ewH-zu-w6C"/>
                         <outlet property="nameLabel" destination="RLz-vQ-Qc9" id="aoX-0b-Qwf"/>
                         <outlet property="profilePicture" destination="5LM-go-cwv" id="w4r-Tv-3l3"/>
-                        <outlet property="questionsButton" destination="DoV-MJ-eC9" id="XiD-3s-KtJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nJw-C3-Oxs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -528,102 +543,19 @@
             </objects>
             <point key="canvasLocation" x="69" y="129"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="6Ek-kh-tHM">
-            <objects>
-                <viewController id="Ar5-hf-Yf1" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="hh6-VJ-f8u">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ezN-p8-Fvz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
     </scenes>
     <resources>
         <image name="cell_background.png" width="320" height="70"/>
         <image name="logo.png" width="80" height="74"/>
+        <image name="man_24.png" width="24" height="24"/>
     </resources>
-    <classes>
-        <class className="CategoryCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategoryCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="cellBackgroundImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="cellCategoryLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="cellHeaderImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="cellSecondaryLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="CategoryCollectionCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategoryCollectionCell.h"/>
-        </class>
-        <class className="CategoryCollectionViewController" superclassName="UICollectionViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategoryCollectionViewController.h"/>
-        </class>
-        <class className="CategoryQuestionsTableViewController" superclassName="PFQueryTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategoryQuestionsTableViewController.h"/>
-        </class>
-        <class className="CategoryTableViewController" superclassName="PFQueryTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategoryTableViewController.h"/>
-        </class>
-        <class className="FBProfilePictureView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FBProfilePictureView.h"/>
-        </class>
-        <class className="MainViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="PFQueryTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PFQueryTableViewController.h"/>
-        </class>
-        <class className="QuestionCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/QuestionCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="partnerCheckmark" candidateClass="UIView"/>
-                <relationship kind="outlet" name="questionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="userCheckmark" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="QuestionDetailViewController" superclassName="PFQueryTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/QuestionDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="questionLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="UICollectionReusableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
-        </class>
-        <class className="UICollectionViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewController.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onInvitePartnerClick:"/>
-                <relationship kind="outlet" name="invitePartnerButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="profilePicture" candidateClass="FBProfilePictureView"/>
-                <relationship kind="outlet" name="questionsButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mMi-3c-hc9"/>
-        <segue reference="3gQ-KR-uYo"/>
+        <segue reference="lcd-rj-2lD"/>
+        <segue reference="dYZ-Mw-VZP"/>
     </inferredMetricsTieBreakers>
 </document>
