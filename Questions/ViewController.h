@@ -10,5 +10,6 @@
 
 
 @interface ViewController : UIViewController
+- (IBAction)done:(id)sender;
 
 @end

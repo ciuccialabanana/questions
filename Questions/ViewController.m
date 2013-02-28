@@ -37,7 +37,7 @@
     // Create Login View so that the app will be granted "status_update" permission.
     FBLoginView *loginview = [[FBLoginView alloc] init];
     
-    loginview.frame = CGRectOffset(loginview.frame, 5, 5);
+    loginview.frame = CGRectOffset(loginview.frame, 20, 280);
     loginview.delegate = self;
     
     [self.view addSubview:loginview];
@@ -51,7 +51,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.view.backgroundColor = [UIColor clearColor];
+    //self.view.backgroundColor = [UIColor clearColor];
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,6 +60,11 @@
     [super didReceiveMemoryWarning];
 }
 
+- (IBAction)done:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+    
+}
 
 - (IBAction)onInvitePartnerClick:(id)sender {
     self.friendPickerController = [[FBFriendPickerViewController alloc] init];
@@ -118,7 +124,6 @@
     
     [self dismissViewControllerAnimated:YES completion:^{}];
 }
-
 
 
 @end

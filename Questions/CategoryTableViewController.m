@@ -42,7 +42,8 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.tableView reloadData];
-    self.view.backgroundColor = [UIColor clearColor];
+   // self.view.backgroundColor = [UIColor clearColor];
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 

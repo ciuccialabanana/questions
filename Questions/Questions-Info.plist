@@ -57,7 +57,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>UILaunchImageFile</key>
-	<string>splashScreen</string>
+	<key>UILaunchImageFile~iphone</key>
+	<string>splashScreen.png</string>
 </dict>
 </plist>
