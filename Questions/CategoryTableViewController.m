@@ -18,7 +18,7 @@
 
 @property (nonatomic, weak) Storage *storage;
 
-@property (nonatomic, weak) NSIndexPath *lastCompletedCategoryIndexPath;
+@property (nonatomic, assign) NSInteger lastCompletedCategoryRowNum;
 
 @end
 
@@ -31,6 +31,7 @@
     self.pullToRefreshEnabled = YES;
     self.paginationEnabled = NO;
     self.objectsPerPage = 5;
+    self.lastCompletedCategoryRowNum = -1;
     
     
     self.storage = [Storage sharedInstance];
@@ -105,10 +106,10 @@
     
     //gaming logic, hide cell if previous category is not completed
     if (cell.cellAnsweredQuestionPerCategoryCount == cell.cellTotalQuestionPerCategoryCount){
-        self.lastCompletedCategoryIndexPath = indexPath;
+        self.lastCompletedCategoryRowNum = indexPath.row;
     }
 
-    if (indexPath.row > self.lastCompletedCategoryIndexPath.row + 1){
+    if (indexPath.row > 0 && indexPath.row > self.lastCompletedCategoryRowNum + 1){
         [cell setHidden:YES];
     }
 
