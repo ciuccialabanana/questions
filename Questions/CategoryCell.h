@@ -14,4 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *cellCategoryLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cellSecondaryLabel;
 
+@property (nonatomic, weak) NSNumber *cellAnsweredQuestionPerCategoryCount;
+@property (nonatomic, weak) NSNumber *cellTotalQuestionPerCategoryCount;
+
 @end

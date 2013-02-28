@@ -6,6 +6,14 @@
          contextName = "-[CategoryQuestionsTableViewController getUserAnswers]:CategoryQuestionsTableViewController.m">
       </ContextState>
       <ContextState
+         contextName = "-[CategoryTableViewController tableView:didSelectRowAtIndexPath:]:CategoryTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__35-[Storage fetchUserAnswersForUser:]_block_invoke:Storage.m">
          <PersistentStrings>
             <PersistentString
@@ -69,7 +77,10 @@
          contextName = "-[CategoryTableViewController tableView:cellForRowAtIndexPath:object:]:CategoryTableViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.storage.user.questionAnswerMap">
+               value = "self.tableView">
+            </PersistentString>
+            <PersistentString
+               value = "[tableView dequeueReusableCellWithIdentifier:CellIdentifier].cellSecondaryLabel.text">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -18,6 +18,8 @@
 
 @property (nonatomic, weak) Storage *storage;
 
+@property (nonatomic, weak) NSIndexPath *lastCompletedCategoryIndexPath;
+
 @end
 
 
@@ -78,7 +80,7 @@
     
     CategoryCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+        cell = [[CategoryCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                       reuseIdentifier:CellIdentifier];
     }
     
@@ -88,13 +90,27 @@
     
     //answered questions count
     NSString *answeredQuestionsCount = @"0";
+    cell.cellAnsweredQuestionPerCategoryCount = 0;
     if([self.storage.user.userAnsweredQuestionsPerCategory objectForKey:[object objectId]] != nil){
-        answeredQuestionsCount = [[self.storage.user.userAnsweredQuestionsPerCategory objectForKey:object.objectId] stringValue];
+        cell.cellAnsweredQuestionPerCategoryCount = [self.storage.user.userAnsweredQuestionsPerCategory objectForKey:object.objectId];
+        answeredQuestionsCount = [cell.cellAnsweredQuestionPerCategoryCount stringValue];
     }
-    NSString *totalQuestionsCount = [[self.storage.questionsPerCategoryTotalCount objectForKey:object.objectId] stringValue];
+    
+    cell.cellTotalQuestionPerCategoryCount = [self.storage.questionsPerCategoryTotalCount objectForKey:object.objectId];
+    NSString *totalQuestionsCount = [cell.cellTotalQuestionPerCategoryCount stringValue];
     
     cell.cellSecondaryLabel.text = [[answeredQuestionsCount stringByAppendingString:@" / "] stringByAppendingString:totalQuestionsCount];
     
+    
+    //gaming logic, hide cell if previous category is not completed
+    if (cell.cellAnsweredQuestionPerCategoryCount == cell.cellTotalQuestionPerCategoryCount){
+        self.lastCompletedCategoryIndexPath = indexPath;
+    }
+
+    if (indexPath.row > self.lastCompletedCategoryIndexPath.row + 1){
+        [cell setHidden:YES];
+    }
+
     
 //    self.storage.user.questionAnswerMap
     
@@ -110,6 +126,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     self.currentCategoryId = [[self objectAtIndexPath:indexPath] objectId];
     [self performSegueWithIdentifier:@"goToCategoryQuestions" sender:[self.tableView cellForRowAtIndexPath:indexPath]];
     
