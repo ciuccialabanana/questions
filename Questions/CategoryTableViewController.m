@@ -103,7 +103,7 @@
     
     cell.cellSecondaryLabel.text = [[answeredQuestionsCount stringByAppendingString:@" / "] stringByAppendingString:totalQuestionsCount];
     
-    
+                                                            
     //gaming logic, hide cell if previous category is not completed
     if (cell.cellAnsweredQuestionPerCategoryCount == cell.cellTotalQuestionPerCategoryCount){
         self.lastCompletedCategoryRowNum = indexPath.row;
