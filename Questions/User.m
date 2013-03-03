@@ -49,6 +49,7 @@
 
 - (void)updateWithDictionary:(NSDictionary *)dictionary
 {
+    [self clear];
     if ([dictionary objectForKey:USERID]) {
         self.userId = [dictionary objectForKey:USERID];
     }
@@ -56,6 +57,12 @@
     if ([dictionary objectForKey:FACEBOOKID]) {
         self.facebookId = [dictionary objectForKey:FACEBOOKID];
     }
+    
+    if ([dictionary objectForKey:PARTNERID]) {
+        self.partner = [[User alloc] initWithUserId:[dictionary objectForKey:PARTNERID]];
+    }
+    
+    
 }
 
 @end

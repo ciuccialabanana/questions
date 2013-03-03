@@ -11,7 +11,7 @@
 #import <Parse/Parse.h>
 #import "Storage.h"
 
-@interface ViewController () <FBLoginViewDelegate, FBFriendPickerDelegate>
+@interface ViewController () <FBLoginViewDelegate, FBFriendPickerDelegate, UIAlertViewDelegate>
 
 
 @property (nonatomic, weak) Storage *storage;
@@ -44,15 +44,16 @@
     
     [loginview sizeToFit];
     
-    
     self.storage = [Storage sharedInstance];
+    
+    NSString *notificationName = @"USER_PARTNER_NOTIFICATION";
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userPartnerNotification:) name:notificationName object:nil];
     
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    //self.view.backgroundColor = [UIColor clearColor];
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,7 +91,7 @@
 
     self.nameLabel.text = [NSString stringWithFormat:@"Hello %@!", user.first_name];    
     self.profilePicture.profileID = user.id;
-    [self.storage fetchUserInformationWithFacebookId:user.id forUser:self.storage.user];
+    [self.storage fetchUserInformationWithFacebookId:user.id forUser:self.storage.user withPartner:YES] ;
 }
 
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
@@ -124,6 +125,33 @@
     
     [self dismissViewControllerAnimated:YES completion:^{}];
 }
+
+
+#pragma mark - Show partner notification
+
+- (void)userPartnerNotification:(NSNotification *)notification
+{
+    
+    NSString *message = [NSString stringWithFormat:@"Do you wanna couple with %@", [notification.userInfo objectForKey:@"partnerName"]];
+    UIAlertView *partnerMessage = [[UIAlertView alloc] initWithTitle:@"Partner"
+                                                             message:message
+                                                            delegate:self
+                                                   cancelButtonTitle:@"Nope"
+                                                   otherButtonTitles:@"Yep", nil];
+    [partnerMessage show];
+}
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        [self.storage fetchPartnerAnswers];
+    } else {
+        [self.storage deleteCouple];
+    }
+}
+
+
 
 
 @end

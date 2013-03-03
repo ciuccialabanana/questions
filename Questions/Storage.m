@@ -9,6 +9,12 @@
 #import "Storage.h"
 #import <FacebookSDK/FacebookSDK.h>
 
+@interface Storage ()
+
+@property (nonatomic, strong) id<FBGraphUser> possiblePartner;
+@property (nonatomic, strong) PFObject *tempCoupleObject;
+@end
+
 @implementation Storage
 
 + (id)sharedInstance
@@ -20,7 +26,6 @@
     });
     return _instance;
 }
-
 
 - (id)init
 {
@@ -43,7 +48,7 @@
         
         [defaults setObject:self.user.userId forKey:USERID];
         if ([defaults synchronize]) {
-            NSLog(@"saved");
+            NSLog(@"user info saved on device");
             // TODO: save user to parse
         } else {
             NSLog(@"error saving");
@@ -54,7 +59,8 @@
     return self;
 }
 
-- (void)initCategoryQuestionsTotalCounts{
+- (void)initCategoryQuestionsTotalCounts
+{
     self.questionsPerCategoryTotalCount = [NSMutableDictionary dictionary];
     //TODO: count items for each category
     PFQuery *allCatQuery = [PFQuery queryWithClassName:@"Categories"];
@@ -120,9 +126,7 @@
     [self.user.questionAnswerMap setObject:answer forKey:question.objectId];
 }
 
-// TODO: REFACTOR THIS TO RETURN USER OBJECT
-
-- (void)fetchUserInformationWithFacebookId:(NSString *)facebookId forUser:(User *)user
+- (void)fetchUserInformationWithFacebookId:(NSString *)facebookId forUser:(User *)user withPartner:(BOOL)partner
 {
     PFQuery *query = [PFQuery queryWithClassName:USER];
     [query whereKey:FACEBOOKID equalTo:facebookId];
@@ -132,16 +136,44 @@
                 user.facebookId = facebookId;
                 [self storeInfoToServerForUser:user];
             } else if ([objects count] == 1){
-                PFObject *userObject = [objects objectAtIndex:0];
-                NSString *userId = [userObject objectForKey:USERID];
-                NSString *facebookId = [userObject objectForKey:FACEBOOKID];
-                [user clear];
-                NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:userId, USERID, facebookId, FACEBOOKID, nil];
+                
+                PFObject *currentUserObject = [objects lastObject];
+                NSString *userId = [currentUserObject objectForKey:USERID];
+                NSString *facebookId = [currentUserObject objectForKey:FACEBOOKID];
+                
+                NSString *partnerId = [currentUserObject objectForKey:PARTNERID];
+                NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                                            userId, USERID,
+                                            facebookId, FACEBOOKID,
+                                            nil];
+                
+                if (partnerId) {
+                    [dictionary setObject:partnerId forKey:PARTNERID];
+                }
                 [user updateWithDictionary:dictionary];
+
+                [self fetchUserAnswersForUser:user];
                 
-                [self fetchUserAnswersForUser:self.user];
+                if (partner) {  // main user
+                    self.userObject = currentUserObject;
+                    
+                    if (partnerId) {
+                        [self fetchUserAnswersForUser:user.partner];
+                    } else {
+                        [self fetchPartnerInformation:user];
+                    }
                 
-                [self fetchPartnerInformation:self.user];
+                } else {        // partner user
+                    self.partnerObject = [objects lastObject];
+                    [self.userObject setObject:[self.partnerObject objectForKey:USERID] forKey:PARTNERID];
+                    [self.userObject saveInBackground];
+                    [self.tempCoupleObject setObject:[NSNumber numberWithBool:YES] forKey:VALID];
+                    [self.tempCoupleObject saveInBackground];
+                    [self.partnerObject setObject:[self.userObject objectForKey:USERID] forKey:PARTNERID];
+                    [self.partnerObject saveInBackground];                    
+                }
+                
+                
                 
             } else {
                 NSLog(@"Too many users with same facebook id. ERROR!");
@@ -150,7 +182,6 @@
         
     }];
 }
-
 
 - (void)fetchPartnerInformation:(User *)user
 {
@@ -161,16 +192,17 @@
             if ([objects count] > 1) {
                 NSLog(@"Too many couples for the following users. ERROR!");
             } else if ([objects count] == 1) {
-                PFObject *coupleObject = [objects lastObject];
-                [FBRequestConnection startWithGraphPath:[coupleObject objectForKey:SENDER] completionHandler:^(FBRequestConnection *connection, id<FBGraphUser> result, NSError *error) {
+                self.tempCoupleObject = [objects lastObject];
+                [FBRequestConnection startWithGraphPath:[self.tempCoupleObject objectForKey:SENDER] completionHandler:^(FBRequestConnection *connection, id<FBGraphUser> result, NSError *error) {
                     
                     self.possiblePartner = result;
                     
+                    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                                              result.first_name, @"partnerName",
+                                              nil];
+                    NSString *notificationName = @"USER_PARTNER_NOTIFICATION";
+                    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:self userInfo:userInfo];
                     
-//                    user.partner = [[User alloc] init];
-//                    [self fetchUserInformationWithFacebookId:user.facebookId forUser:user.partner];
-                    // FETCH PARTNER INFORMATION
-                    // TODO: FETCH PARTNER ANSWERS using parse sdk
                 }];
 
             }
@@ -182,7 +214,7 @@
 {
     
     PFQuery *query = [PFQuery queryWithClassName:USERANSWER];
-    [query whereKey:@"userId" equalTo:self.user.userId];
+    [query whereKey:USERID equalTo:user.userId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             user.userAnsweredQuestionsPerCategory = [NSMutableDictionary dictionary];
@@ -201,7 +233,25 @@
     }];
 }
 
-- (void)incrementUserAnsweredQuestionsPerCategory:(NSString *)categoryId{
+- (void)fetchPartnerAnswers
+{
+    [self fetchUserInformationWithFacebookId:self.possiblePartner.id forUser:self.user.partner withPartner:NO];
+}
+
+- (void)deleteCouple
+{
+    [self.tempCoupleObject deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"Couple deleted");
+        } else {
+            NSLog(@"Error: %@", error);
+        }
+    }];
+}
+
+
+- (void)incrementUserAnsweredQuestionsPerCategory:(NSString *)categoryId
+{
     
     if (categoryId) {
         NSNumber *answeredQuestionsCount = [self.user.userAnsweredQuestionsPerCategory objectForKey:categoryId];
@@ -213,7 +263,6 @@
         [self.user.userAnsweredQuestionsPerCategory setObject:answeredQuestionsCount forKey:categoryId];
     }
 }
-
 
 - (void)createCoupleToConfirmWithPartnerFacebookId:(NSString *)facebookId
 {

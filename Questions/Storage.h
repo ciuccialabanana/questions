@@ -14,14 +14,17 @@
 
 @property (nonatomic, strong) User *user;
 @property (nonatomic, strong) PFObject *userObject;
+@property (nonatomic, strong) PFObject *partnerObject;
 @property (nonatomic, strong) NSMutableDictionary *questionsPerCategoryTotalCount;
-@property (nonatomic, strong) id possiblePartner;
+
 
 
 + (id)sharedInstance;
 
 - (void)storeUserAnswerWithAnswerId:(NSString *)answerId withQuestion:(PFObject *)question;
-- (void)fetchUserInformationWithFacebookId:(NSString *)facebookId forUser:(User *)user;
+- (void)fetchUserInformationWithFacebookId:(NSString *)facebookId forUser:(User *)user  withPartner:(BOOL)partner;
+- (void)fetchPartnerAnswers;
+- (void)deleteCouple;
 - (void)createCoupleToConfirmWithPartnerFacebookId:(NSString *)facebookId;
 - (void)clearCurrentUser;
 - (void)incrementUserAnsweredQuestionsPerCategory:(NSString *)categoryId;

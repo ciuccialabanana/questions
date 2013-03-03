@@ -22,6 +22,7 @@
 #define ANSWERID @"answerId"
 #define CATEGORYID @"categoryId"
 #define QUESTIONID @"questionId"
+#define PARTNERID @"partnerId"
 #define SENDER @"sender"
 #define RECEIVER @"receiver"
 #define VALID @"valid"
